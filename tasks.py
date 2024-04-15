@@ -1,6 +1,6 @@
 from robocorp.tasks import task
 # from robocorp.workitems import WorkItems
-from robocorp.browser import Browser
+from robocorp.browser import Browser, vault
 from robocorp.tasks import get_output_dir
 
 from RPA.Browser.Selenium import Selenium 
@@ -13,7 +13,7 @@ def main():
     # Initialize work items and browser
     # work_items = WorkItems()
     browser = Selenium(auto_close = False)
-
+    secrets =vault.get_secret('aljazeersite')
     # browser.configure(
     #    browser_engine="chromium", 
     #    screenshot="only-on-failure",
@@ -35,7 +35,7 @@ def main():
         
         # Implement web scraping logic here
         # Example: browser.goto("https://www.aljazeera.com/")
-    browser.open_available_browser("https://www.aljazeera.com/",maximized=True)
+    browser.open_available_browser(secrets['url'],maximized=True)
     try:
         browser.click_button('Allow all')
 
