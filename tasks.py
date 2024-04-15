@@ -45,7 +45,9 @@ def main():
     # browser.click_element()
     # browser.wait_for_element("/html/body/div[1]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg", timeout=10)
     # site-header__search-trigger
-    browser.click_element("//button[@aria-pressed='false']//*[name()='svg']")
+    locator1 = "//button[@aria-pressed='false']//*[name()='svg']"
+    browser.wait_until_page_contains_element(locator1, timeout=10)
+    browser.click_element(locator1)
     browser.input_text("//input[@placeholder='Search']",'Business',)
     browser.click_button("//button[@aria-label='Search Al Jazeera']")
     # browser.click_element("//select[@id='search-sort-option']")
