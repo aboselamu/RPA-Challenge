@@ -64,7 +64,7 @@ def main():
     for title in titles:
         # Clean the title text by replacing &shy; with an empty string
         clean_title = title.text.replace("&shy;", "")
-        print("KOMan " + clean_title.text)
+        print("KOMan " + clean_title)
         
     print(str(len(articles))+ " > This is Selamu's output")
     
