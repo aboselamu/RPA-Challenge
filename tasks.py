@@ -58,7 +58,8 @@ def main():
     browser.click_element(dropdown_locator)
     browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
     search_list_selector = browser.find_element("xpath://*[@id='main-content-area']/div[2]/div[2]")
-    print(search_list_selector)
+    articles = browser.find_elements("xpath://*[@id='main-content-area']/div[2]/div[2]/article")
+    print(len(articles) + "This is Selamu's output")
     
 # /html/body/div[1]/div/div[3]/div/div/div/div/main/div[2]/div[2]
 # //*[@id="main-content-area"]/div[2]/div[2]
