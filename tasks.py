@@ -49,7 +49,7 @@ def main():
     browser.input_text("//input[@placeholder='Search']",'Business',)
     browser.click_button("//button[@aria-label='Search Al Jazeera']")
     # browser.click_element("//select[@id='search-sort-option']")
-    locator1 = "//span[@class='search-summary__query']"
+    locator1 = "//select[@id='search-sort-option']"
     browser.wait_until_element_is_visible(locator1, timeout=10)
     browser.click_element(locator1)
     # //*[@id="root"]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg
