@@ -56,8 +56,10 @@ def main():
     browser.click_element(locator2)
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
     browser.click_element(dropdown_locator)
-    search_list_selector = browser.find_element("css:search-result__list")
+    search_list_selector = browser.find_element("css:div.l-col.l-col--8 > div.search-result__list")
     print(search_list_selector)
+# //*[@id="main-content-area"]/div[2]/div[2]
+# //*[@id="main-content-area"]/div[2]/div[2]
 
 
 
