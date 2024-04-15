@@ -56,6 +56,7 @@ def main():
     browser.click_element(locator2)
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
     browser.click_element(dropdown_locator)
+     browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
     search_list_selector = browser.find_element("xpath://*[@id='main-content-area']/div[2]/div[2]")
     print(search_list_selector)
     
