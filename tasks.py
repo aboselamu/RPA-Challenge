@@ -1,3 +1,4 @@
+import html
 from robocorp.tasks import task
 # from robocorp.workitems import WorkItems
 from robocorp import browser, vault
