@@ -63,7 +63,7 @@ def main():
     titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     titles = browser.find_elements(titles_xpath)
     date_path = "//*[@id='main-content-area']/div[2]/div[2]/article[1]/div[2]/footer/div/div/div/div/span"
-    dates = browser.find.find_elements(date_path)
+    dates = browser.find_elements(date_path)
     for date, title in dates, titles:
         # Decode HTML entities in the title text
         decoded_title = html.unescape(title.text)
