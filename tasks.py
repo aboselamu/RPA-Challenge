@@ -64,12 +64,14 @@ def main():
     titles = browser.find_elements(titles_xpath)
     date_path = "//*[@id='main-content-area']/div[2]/div[2]/article[1]/div[2]/footer/div/div/div/div/span"
     dates = browser.find_elements(date_path)
-    for date, title in dates, titles:
-        # Decode HTML entities in the title text
-        decoded_title = html.unescape(title.text)
-        # Further clean the title text if necessary
-        clean_title = decoded_title.replace("&shy;", "")
-        print("KOMan " + clean_title, date)
+    for date1 in dates:
+        print("KOMan " + date1)
+    # for date, title in dates, titles:
+    #     # Decode HTML entities in the title text
+    #     decoded_title = html.unescape(title.text)
+    #     # Further clean the title text if necessary
+    #     clean_title = decoded_title.replace("&shy;", "")
+    #     print("KOMan " + clean_title, date)
         
     print(str(len(articles))+ " > This is Selamu's output")
     
