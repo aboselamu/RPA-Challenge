@@ -59,7 +59,7 @@ def main():
     browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
     search_list_selector = browser.find_element("xpath://*[@id='main-content-area']/div[2]/div[2]")
     articles = browser.find_elements("xpath://*[@id='main-content-area']/div[2]/div[2]/article")
-    print(len(articles) + "This is Selamu's output")
+    print(str(len(articles))+ " > This is Selamu's output")
     
 # /html/body/div[1]/div/div[3]/div/div/div/div/main/div[2]/div[2]
 # //*[@id="main-content-area"]/div[2]/div[2]
