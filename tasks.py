@@ -55,7 +55,7 @@ def main():
     browser.wait_until_element_is_visible(locator2, timeout=10)
     browser.click_element(locator2)
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
-    browser.click_element(dropdown_locator, "Date") 
+    browser.click_element(dropdown_locator) 
     # //*[@id="root"]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg
     # <button type="button" class="no-styles-button" aria-pressed="false"><span class="screen-reader-text">Click here to search</span><svg class="icon icon--search icon--grey icon--24 " viewBox="0 0 20 20" version="1.1" aria-hidden="true"><title>search</title><path class="icon-main-color" d="M3.4 11.56a5.77 5.77 0 1 1 8.16 0 5.78 5.78 0 0 1-8.16 0zM20 18.82l-6.68-6.68a7.48 7.48 0 1 0-1.18 1.18L18.82 20 20 18.82z"></path></svg></button>
         # For each news item extracted, process and store data in Excel
