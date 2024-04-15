@@ -44,7 +44,7 @@ def main():
         # Perform search, navigate, and extract data
     # browser.click_element()
     # browser.wait_for_element("/html/body/div[1]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg", timeout=10)
-    site-header__search-trigger
+    # site-header__search-trigger
     browser.click_element("/html/body/div[1]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg")
     
     # //*[@id="root"]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg
