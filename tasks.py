@@ -62,8 +62,10 @@ def main():
     titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     titles = browser.find_elements(titles_xpath)
     for title in titles:
-        # Clean the title text by replacing &shy; with an empty string
-        clean_title = title.text.replace("&shy;", "")
+        # Decode HTML entities in the title text
+        decoded_title = html.unescape(title.text)
+        # Further clean the title text if necessary
+        clean_title = decoded_title.replace("&shy;", "")
         print("KOMan " + clean_title)
         
     print(str(len(articles))+ " > This is Selamu's output")
