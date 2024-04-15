@@ -45,9 +45,9 @@ def main():
     # browser.click_element()
     # browser.wait_for_element("/html/body/div[1]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg", timeout=10)
     # site-header__search-trigger
-    
     browser.click_element("//button[@aria-pressed='false']//*[name()='svg']")
-    
+    browser.input_text("//input[@placeholder='Search']",'Business',)
+    browser.click_button("//button[@aria-label='Search Al Jazeera']")
     # //*[@id="root"]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg
     # <button type="button" class="no-styles-button" aria-pressed="false"><span class="screen-reader-text">Click here to search</span><svg class="icon icon--search icon--grey icon--24 " viewBox="0 0 20 20" version="1.1" aria-hidden="true"><title>search</title><path class="icon-main-color" d="M3.4 11.56a5.77 5.77 0 1 1 8.16 0 5.78 5.78 0 0 1-8.16 0zM20 18.82l-6.68-6.68a7.48 7.48 0 1 0-1.18 1.18L18.82 20 20 18.82z"></path></svg></button>
         # For each news item extracted, process and store data in Excel
@@ -59,7 +59,6 @@ def main():
     # excel.close()
     
     # Close the browser
-    browser.close()
-
+    browser.close_all_browsers()
 if __name__ == "__main__":
     main()
