@@ -1,6 +1,6 @@
 from robocorp.tasks import task
 # from robocorp.workitems import WorkItems
-from robocorp import Browser, vault
+from robocorp import browser, vault
 from robocorp.tasks import get_output_dir
 
 from RPA.Browser.Selenium import Selenium 
