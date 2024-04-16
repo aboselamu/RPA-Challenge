@@ -126,8 +126,8 @@ def extract_before_ellipsis(text):
     description_part.replace("Â","")
 
     return date_part, description_part
-def date_format(val):
-    possible_dates = {0:["seconds ago", "minutes ago","hours ago","days ago"]}
+# def date_format(val):
+#     possible_dates = {0:["seconds ago", "minutes ago","hours ago","days ago"]}
 
 if __name__ == "__main__":
     main()
