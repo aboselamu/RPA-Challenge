@@ -64,6 +64,7 @@ def main():
     articles = browser.find_elements("tag:article", parent=search_list_selector)
     # articles = search_list_selector.find_elements("xpath:.//[article")
     for article in articles:
+        browser.wait_until_page_contains_element(".//div[2]/div[1]/h3", timeout=timedelta(seconds=10), parent=article)
         # Now 'article' is a single WebElement, which can be used as a parent
         title = browser.find_element(".//div[2]/div[1]/h3", parent=article)
         print(title.text, "rrrrrrrrr")  # This will print the text of the title within each article
