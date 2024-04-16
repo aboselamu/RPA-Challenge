@@ -118,6 +118,7 @@ def extract_before_ellipsis(text):
         # Take the first part, before the '...'
         date_part = parts[0]
         description_part=parts[1]
+        description_part.replace("Â","")
     except:
         pass
     return date_part, description_part
