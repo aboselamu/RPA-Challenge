@@ -76,6 +76,7 @@ def main():
         # getting information 
         excert = browser.find_element("tag:p",parent=article)
         time_of_post, description  = extract_before_ellipsis(excert.text)
+        sdjlfk
         print(time_of_post, " SElamu")
         article_date = formated_article_date(time_of_post)
         print(article_date, target_date,)
