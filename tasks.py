@@ -65,7 +65,7 @@ def main():
     date_path = "//*[@id='main-content-area']/div[2]/div[2]/article[1]/div[2]/footer/div/div/div/div/span"
     dates = browser.find_elements(date_path)
     for date1 in dates:
-        print("KOMan " + date1)
+        print( date1)
     # for date, title in dates, titles:
     #     # Decode HTML entities in the title text
     #     decoded_title = html.unescape(title.text)
