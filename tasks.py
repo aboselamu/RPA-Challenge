@@ -74,8 +74,9 @@ def main():
         print(title.text) # This will print the text of the title within each article
         print( time_of_post)
         print(description)
+        # Tes Â­la.."
         test_mes = "TesÂ­la.."
-        print(type("Â"), (test_mes[4]),len(test_mes))
+        print(type("Â"), test_mes[3], test_mes[4],len(test_mes))
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     
     # titles = browser.find_elements(titles_xpath)    
