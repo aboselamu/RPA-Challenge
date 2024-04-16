@@ -136,7 +136,7 @@ def formated_article_date(date_extracted):
     date_extracted = date_extracted.strip()
 
     # possible hours, minutes and seconds
-    possible_hms = ["second", "seconds","minute", "minutes", "hour","hours"]
+    possible_hms = ["second", "seconds","min\xadutes","minute", "minutes", "hour","hours"]
     possible_days = ["day", "days"]
     current_date = datetime.now()
   
