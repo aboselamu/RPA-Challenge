@@ -120,6 +120,6 @@ def extract_before_ellipsis(text):
         description_part=parts[1]
     except:
         pass
-    return before_ellipsis, description_part
+    return date_part, description_part
 if __name__ == "__main__":
     main()
