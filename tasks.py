@@ -69,23 +69,13 @@ def main():
         title= browser.find_element("tag:h3", parent=article)
         # title = article.find_element(".//div[2]/div[1]/h3")
         excerts = browser.find_element("tag:p",parent=article)
-        print("Title now")
-
-        print(type(title.text))  # This will print the text of the title within each article
-        print(excerts.text)
-        print("Excert below")
-    # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
-    # titles = browser.find_elements(titles_xpath)
-    
-    excerts_path = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[2]/div/p"
-    # date_path = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/footer/div/div/div/div/span"
-    excerts = browser.find_elements(excerts_path)
-    for excert in excerts:
-        print("ONe-Two")
         time_of_post = extract_before_ellipsis(excert.text)
+        print("Title now")
+        print(title.text) # This will print the text of the title within each article
         print( time_of_post)
-        print("TTTTTTT")
-
+    # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
+    
+    # titles = browser.find_elements(titles_xpath)    
     # for title in  titles:
     #     # Decode HTML entities in the title text
     #     decoded_title = html.unescape(title.text)
