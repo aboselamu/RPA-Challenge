@@ -77,7 +77,7 @@ def main():
         print( time_of_post)
         print(description)
         # Tes Â­la.."
-        s = "RoÂ­han PaÂ­tel," oÃ‚Â ­han
+        s = "RoÂ­han PaÂ­tel," 
         s.replace(Â\xad,"hj") 
         print(s)
 
