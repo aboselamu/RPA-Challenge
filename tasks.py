@@ -1,4 +1,6 @@
-import html
+# import html
+from datetime import datetime, timedelta
+from datetime import datetime
 from robocorp.tasks import task
 # from robocorp.workitems import WorkItems
 from robocorp import browser, vault
@@ -65,21 +67,24 @@ def main():
     # Use a relative XPath from the context of 'search_list_selector'
     articles = browser.find_elements("tag:article", parent=search_list_selector)
     # articles = search_list_selector.find_elements("xpath:.//[article")
+
+    num_months_ago = 1
+    current_date = datetime.now()
+    target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
+
     for article in articles:
-        # 
-        # Now 'article' is a single WebElement, which can be used as a parent
-        title= browser.find_element("tag:h3", parent=article)
-        # title = article.find_element(".//div[2]/div[1]/h3")
+        # getting information 
         excert = browser.find_element("tag:p",parent=article)
         time_of_post, description  = extract_before_ellipsis(excert.text)
-        print("Title now")
-        print(title.text) # This will print the text of the title within each article
-        print( time_of_post)
-        print(description)
-        # Tes Â­la.."
-        s = "RoÂ­han PaÂ­tel," 
-        s.replace(Â\xad,"hj") 
-        print(s)
+        article_date = formated_article_date(time_of_post)
+        if is_within_time_frame(article_date, target_date):
+            # Now 'article' is a single WebElement, which can be used as a parent
+            title= browser.find_element("tag:h3", parent=article)
+            print("Title now")
+            print(title.text) # This will print the text of the title within each article
+            print( time_of_post, article_date)
+            print(description)
+            print("ONe article ends here")
 
         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
@@ -93,18 +98,6 @@ def main():
     #     print("KOMan " + clean_title)
         
     print(str(len(articles))+ " > This is Selamu's output")
-    
-# /html/body/div[1]/div/div[3]/div/div/div/div/main/div[2]/div[2]
-# //*[@id="main-content-area"]/div[2]/div[2]
-# //*[@id="main-content-area"]/div[2]/div[2]
-
-
-
-
-
-    
-    # //*[@id="root"]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg
-    # <button type="button" class="no-styles-button" aria-pressed="false"><span class="screen-reader-text">Click here to search</span><svg class="icon icon--search icon--grey icon--24 " viewBox="0 0 20 20" version="1.1" aria-hidden="true"><title>search</title><path class="icon-main-color" d="M3.4 11.56a5.77 5.77 0 1 1 8.16 0 5.78 5.78 0 0 1-8.16 0zM20 18.82l-6.68-6.68a7.48 7.48 0 1 0-1.18 1.18L18.82 20 20 18.82z"></path></svg></button>
         # For each news item extracted, process and store data in Excel
         # Example row to append:
         # excel.append_row([title, date, description, picture_filename, count, contains_money])
@@ -115,6 +108,8 @@ def main():
     
     # Close the browser
     browser.close_all_browsers()
+
+    
 def extract_before_ellipsis(text):
     if len(text) <=0:
         return 
@@ -131,8 +126,50 @@ def extract_before_ellipsis(text):
     description_part.replace("Â","")
 
     return date_part, description_part
-# def date_format(val):
-#     possible_dates = {0:["seconds ago", "minutes ago","hours ago","days ago"]}
+def formated_article_date(date_extracted):
+    # cleaning the date part
+    date_extracted = date_extracted.strip()
+
+    # possible hours, minutes and seconds
+    possible_hms = ["second", "seconds","minute", "minutes", "hour","hours"]
+    possible_days = ["day", "days"]
+    current_date = datetime.now()
+  
+    if(date_extracted.split(" ")[1]) in possible_hms:
+        date_object = current_date
+    elif date_extracted.split(" ")[1] in possible_days:
+         # Split the expression to extract the number of days
+        num_days = int(date_extracted.split()[0])
+        # Calculate the target date by subtracting the number of days from the current date
+        date_object = current_date - timedelta(days=num_days)
+    else:
+        # Convert the date string to a datetime object
+        date_object = datetime.strptime(date_extracted, "%B %d, %Y")
+        # Format the datetime object to the desired format
+    
+    formatted_date = date_object.strftime("%Y%m%d")
+
+    return formatted_date
+
+def is_within_time_frame(article_date, target_date):
+    # Convert article date string to a datetime object
+    article_datetime = datetime.strptime(article_date, "%Y%m%d")
+    # Check if the article date is within the time frame (since the target date)
+    return article_datetime  >= target_date
+
+
+# def get_previous_month_date(date_string, num_months):
+#     # Convert the date string to a datetime object
+#     date_object = datetime.strptime(date_string, "%Y%m%d")
+    
+#     # Calculate the number of days to subtract based on the number of months
+#     days_to_subtract = num_months * 30
+    
+#     # Subtract the timedelta to get the previous month's date
+#     previous_month_date = date_object - timedelta(days=days_to_subtract)
+    
+#     return previous_month_date
+
 
 if __name__ == "__main__":
     main()
