@@ -75,9 +75,9 @@ def main():
         print( time_of_post)
         print(description)
         # Tes Â­la.."
-        test_mes = "TesÂ­la.."
-        t = test_mes.replace("t­","k")
-        print(t.replace("Ã‚Â­"," "))
+        s = "RoÂ­han PaÂ­tel,"
+       s.replace("Â\xad","")
+        print(s)
 
         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
