@@ -68,7 +68,7 @@ def main():
     excerts = browser.find_elements(excerts_path)
     for excert in excerts:
         print("ONe-Two")
-        print( excert)
+        print( excert.text)
         print("TTTTTTT")
     # for date, title in dates, titles:
     #     # Decode HTML entities in the title text
