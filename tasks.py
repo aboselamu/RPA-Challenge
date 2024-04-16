@@ -68,7 +68,7 @@ def main():
         # Now 'article' is a single WebElement, which can be used as a parent
         title= browser.find_element("tag:h3", parent=article)
         # title = article.find_element(".//div[2]/div[1]/h3")
-        excerts = browser.find_element("tag:p",parent=article)
+        excert = browser.find_element("tag:p",parent=article)
         time_of_post = extract_before_ellipsis(excert.text)
         print("Title now")
         print(title.text) # This will print the text of the title within each article
