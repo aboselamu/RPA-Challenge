@@ -121,6 +121,8 @@ def extract_before_ellipsis(text):
     except:
         pass
     description_part.replace("Â","")
+    test_mes = "TesÂ­la to lay off more than 10 perÂ­cent of staff worldÂ­wide amid falling ..."
+    print(test_mes.replace("Â"), "")
     return date_part, description_part
 if __name__ == "__main__":
     main()
