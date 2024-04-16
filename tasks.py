@@ -67,6 +67,7 @@ def main():
     # date_path = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/footer/div/div/div/div/span"
     excerts = browser.find_elements(excerts_path)
     for excert in excerts:
+        print(ONe-Two)
         print( excert)
     # for date, title in dates, titles:
     #     # Decode HTML entities in the title text
