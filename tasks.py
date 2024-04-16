@@ -59,118 +59,118 @@ def main():
     # Search result section
     search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
     # Use a relative XPath from the context of 'search_list_selector'
-    articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
-    # articles = browser.find_elements("tag:article", parent=search_list_selector)
+    # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
+    articles = browser.find_elements("tag:article", parent=search_list_selector)
     # articles = search_list_selector.find_elements("xpath:.//[article")
 
-#     num_months_ago = 1
-#     current_date = datetime.now()
-#     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
-#     print("before Article")
-#     if search_list_selector:
-#         print(articles)
-#         print(type(articles), "ggg")
-#     else:
-#         print("Article not found")
-#     for article in articles:
-#         # getting information 
-#         excert = browser.find_element("tag:p",parent=article)
-#         time_of_post, description  = extract_before_ellipsis(excert.text)
-#         print(time_of_post, " SElamu")
-#         article_date = formated_article_date(time_of_post)
-#         print(article_date, target_date,)
-#         if is_within_time_frame(article_date, target_date):
-#             # Now 'article' is a single WebElement, which can be used as a parent
-#             title= browser.find_element("tag:h3", parent=article)
-#             print("Title now")
-#             print(title.text) # This will print the text of the title within each article
-#             print( time_of_post, article_date)
-#             print(description)
-#             print("ONe article ends here")
+    num_months_ago = 1
+    current_date = datetime.now()
+    target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
+    print("before Article")
+    if search_list_selector:
+        print(articles)
+        print(type(articles), "ggg")
+    else:
+        print("Article not found")
+    for article in articles:
+        # getting information 
+        excert = browser.find_element("tag:p",parent=article)
+        time_of_post, description  = extract_before_ellipsis(excert.text)
+        print(time_of_post, " SElamu")
+        article_date = formated_article_date(time_of_post)
+        print(article_date, target_date,)
+        if is_within_time_frame(article_date, target_date):
+            # Now 'article' is a single WebElement, which can be used as a parent
+            title= browser.find_element("tag:h3", parent=article)
+            print("Title now")
+            print(title.text) # This will print the text of the title within each article
+            print( time_of_post, article_date)
+            print(description)
+            print("ONe article ends here")
 
-#         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
-#     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
+        # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
+    # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     
-#     # titles = browser.find_elements(titles_xpath)    
-#     # for title in  titles:
-#     #     # Decode HTML entities in the title text
-#     #     decoded_title = html.unescape(title.text)
-#     #     # Further clean the title text if necessary
-#     #     clean_title = decoded_title.replace("&shy;", "")
-#     #     print("KOMan " + clean_title)
+    # titles = browser.find_elements(titles_xpath)    
+    # for title in  titles:
+    #     # Decode HTML entities in the title text
+    #     decoded_title = html.unescape(title.text)
+    #     # Further clean the title text if necessary
+    #     clean_title = decoded_title.replace("&shy;", "")
+    #     print("KOMan " + clean_title)
         
-#     print(str(len(articles))+ " > This is Selamu's output")
-#         # For each news item extracted, process and store data in Excel
-#         # Example row to append:
-#         # excel.append_row([title, date, description, picture_filename, count, contains_money])
+    print(str(len(articles))+ " > This is Selamu's output")
+        # For each news item extracted, process and store data in Excel
+        # Example row to append:
+        # excel.append_row([title, date, description, picture_filename, count, contains_money])
         
-#     # Save and close the Excel workbook
-#     # excel.save("output/news_data.xlsx")
-#     # excel.close()
+    # Save and close the Excel workbook
+    # excel.save("output/news_data.xlsx")
+    # excel.close()
     
-#     # Close the browser
-#     browser.close_all_browsers()
+    # Close the browser
+    browser.close_all_browsers()
 
 
-# def extract_before_ellipsis(text):
-#     if len(text) <=0:
-#         return 
-#     # Split the text at '...'
-#     date_part = "No Date"
-#     description_part = ""
-#     try:
-#         parts = text.split(" ...")
-#         # Take the first part, before the '...'
-#         date_part = parts[0]
-#         description_part=parts[1]
-#     except:
-#         pass
-#     description_part.replace("Â","")
+def extract_before_ellipsis(text):
+    if len(text) <=0:
+        return 
+    # Split the text at '...'
+    date_part = "No Date"
+    description_part = ""
+    try:
+        parts = text.split(" ...")
+        # Take the first part, before the '...'
+        date_part = parts[0]
+        description_part=parts[1]
+    except:
+        pass
+    description_part.replace("Â","")
 
-#     return date_part, description_part
-# def formated_article_date(date_extracted):
-#     # cleaning the date part
-#     date_extracted = date_extracted.strip()
+    return date_part, description_part
+def formated_article_date(date_extracted):
+    # cleaning the date part
+    date_extracted = date_extracted.strip()
 
-#     # possible hours, minutes and seconds
-#     possible_hms = ["second", "seconds","minute", "minutes", "hour","hours"]
-#     possible_days = ["day", "days"]
-#     current_date = datetime.now()
+    # possible hours, minutes and seconds
+    possible_hms = ["second", "seconds","minute", "minutes", "hour","hours"]
+    possible_days = ["day", "days"]
+    current_date = datetime.now()
   
-#     if(date_extracted.split(" ")[1]) in possible_hms:
-#         date_object = current_date
-#     elif date_extracted.split(" ")[1] in possible_days:
-#          # Split the expression to extract the number of days
-#         num_days = int(date_extracted.split()[0])
-#         # Calculate the target date by subtracting the number of days from the current date
-#         date_object = current_date - timedelta(days=num_days)
-#     else:
-#         # Convert the date string to a datetime object
-#         date_object = datetime.strptime(date_extracted, "%B %d, %Y")
-#         # Format the datetime object to the desired format
+    if(date_extracted.split(" ")[1]) in possible_hms:
+        date_object = current_date
+    elif date_extracted.split(" ")[1] in possible_days:
+         # Split the expression to extract the number of days
+        num_days = int(date_extracted.split()[0])
+        # Calculate the target date by subtracting the number of days from the current date
+        date_object = current_date - timedelta(days=num_days)
+    else:
+        # Convert the date string to a datetime object
+        date_object = datetime.strptime(date_extracted, "%B %d, %Y")
+        # Format the datetime object to the desired format
     
-#     formatted_date = date_object.strftime("%Y%m%d")
+    formatted_date = date_object.strftime("%Y%m%d")
 
-#     return formatted_date
+    return formatted_date
 
-# def is_within_time_frame(article_date, target_date):
-#     # Convert article date string to a datetime object
-#     article_datetime = datetime.strptime(article_date, "%Y%m%d")
-#     # Check if the article date is within the time frame (since the target date)
-#     return article_datetime  >= target_date
+def is_within_time_frame(article_date, target_date):
+    # Convert article date string to a datetime object
+    article_datetime = datetime.strptime(article_date, "%Y%m%d")
+    # Check if the article date is within the time frame (since the target date)
+    return article_datetime  >= target_date
 
 
-# # def get_previous_month_date(date_string, num_months):
-# #     # Convert the date string to a datetime object
-# #     date_object = datetime.strptime(date_string, "%Y%m%d")
+# def get_previous_month_date(date_string, num_months):
+#     # Convert the date string to a datetime object
+#     date_object = datetime.strptime(date_string, "%Y%m%d")
     
-# #     # Calculate the number of days to subtract based on the number of months
-# #     days_to_subtract = num_months * 30
+#     # Calculate the number of days to subtract based on the number of months
+#     days_to_subtract = num_months * 30
     
-# #     # Subtract the timedelta to get the previous month's date
-# #     previous_month_date = date_object - timedelta(days=days_to_subtract)
+#     # Subtract the timedelta to get the previous month's date
+#     previous_month_date = date_object - timedelta(days=days_to_subtract)
     
-# #     return previous_month_date
+#     return previous_month_date
 
 
 if __name__ == "__main__":
