@@ -61,7 +61,8 @@ def main():
     # Search result section
     search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
     # Use a relative XPath from the context of 'search_list_selector'
-    articles = search_list_selector.find_elements("xpath:.//article")
+    articles = search_list_selector.find_elements("tag:article")
+    # articles = search_list_selector.find_elements("xpath:.//[article")
     
     # 
     titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
