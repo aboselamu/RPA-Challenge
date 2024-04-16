@@ -77,7 +77,7 @@ def main():
         decoded_title = html.unescape(title.text)
         # Further clean the title text if necessary
         clean_title = decoded_title.replace("&shy;", "")
-        print("KOMan " + clean_title, date)
+        print("KOMan " + clean_title)
         
     print(str(len(articles))+ " > This is Selamu's output")
     
