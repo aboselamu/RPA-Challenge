@@ -63,7 +63,7 @@ def main():
     # Use a relative XPath from the context of 'search_list_selector'
     articles = browser.find_elements("tag:article", parent=search_list_selector)
     # articles = search_list_selector.find_elements("xpath:.//[article")
-    title = browser.find_element(".//div[2]/div[1]/h3", parent=article)
+    title = browser.find_element(".//div[2]/div[1]/h3", parent=articles)
     # 
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     # titles = browser.find_elements(titles_xpath)
