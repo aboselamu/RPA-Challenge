@@ -88,7 +88,7 @@ def main():
                 print(description)
                 print("ONe article ends here")
         try:
-             button = browser.find_elements("tag:button", parent=search_list_selector)
+             button = browser.find_element("tag:button", parent=search_list_selector)
              browser.click_element(button)
              print("Botton Clicked")
             # //span[@aria-hidden='true'][normalize-space()='Show more']
