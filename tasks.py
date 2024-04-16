@@ -69,10 +69,11 @@ def main():
         title= browser.find_element("tag:h3", parent=article)
         # title = article.find_element(".//div[2]/div[1]/h3")
         excert = browser.find_element("tag:p",parent=article)
-        time_of_post = extract_before_ellipsis(excert.text)
+        time_of_post, description  = extract_before_ellipsis(excert.text)
         print("Title now")
         print(title.text) # This will print the text of the title within each article
         print( time_of_post)
+        print(description)
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     
     # titles = browser.find_elements(titles_xpath)    
@@ -107,10 +108,18 @@ def main():
     # Close the browser
     browser.close_all_browsers()
 def extract_before_ellipsis(text):
+    if len(text) <=0:
+        return 
     # Split the text at '...'
-    parts = text.split(" ...")
-    # Take the first part, before the '...'
-    before_ellipsis = parts[0]
-    return before_ellipsis
+    date_part = "No Date"
+    description_part = ""
+    try:
+        parts = text.split(" ...")
+        # Take the first part, before the '...'
+        date_part = parts[0]
+        description_part=parts[1]
+    except:
+        pass
+        return before_ellipsis, description_part
 if __name__ == "__main__":
     main()
