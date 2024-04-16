@@ -43,18 +43,20 @@ def main():
     except:
         pass
         # Perform search, navigate, and extract data
-    # browser.click_element()
-    # browser.wait_for_element("/html/body/div[1]/div/div[1]/div[1]/div/header/div[4]/div[2]/button/svg", timeout=10)
     # site-header__search-trigger
     locator1 = "//button[@aria-pressed='false']//*[name()='svg']"
     browser.wait_until_page_contains_element(locator1, timeout=10)
     browser.click_element(locator1)
-    browser.input_text("//input[@placeholder='Search']",'Business',)
+    browser.input_text("//input[@placeholder='Search']",'Busdkfjdkfiness',)
     browser.click_button("//button[@aria-label='Search Al Jazeera']")
     # browser.click_element("//select[@id='search-sort-option']")
-    locator2 = "//select[@id='search-sort-option']"
-    browser.wait_until_element_is_visible(locator2, timeout=10)
-    browser.click_element(locator2)
+    try:
+        locator2 = "//select[@id='search-sort-option']"
+        browser.wait_until_element_is_visible(locator2, timeout=10)
+        browser.click_element(locator2)
+    except:
+        print("No news associated with the search phrase")
+        return
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
     browser.click_element(dropdown_locator)
     browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
@@ -75,8 +77,8 @@ def main():
         print( time_of_post)
         print(description)
         # Tes Â­la.."
-        s = "RoÂ­han PaÂ­tel,"
-        s.replace("Â\xad","hj") 
+        s = "RoÂ­han PaÂ­tel," oÃ‚Â ­han
+        s.replace(Â\xad,"hj") 
         print(s)
 
         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
