@@ -71,13 +71,14 @@ def main():
     num_months_ago = 1
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
-
+    print("before Article")
     for article in articles:
         # getting information 
         excert = browser.find_element("tag:p",parent=article)
         time_of_post, description  = extract_before_ellipsis(excert.text)
         print(time_of_post, " SElamu")
         article_date = formated_article_date(time_of_post)
+        print(article_date, target_date,)
         if is_within_time_frame(article_date, target_date):
             # Now 'article' is a single WebElement, which can be used as a parent
             title= browser.find_element("tag:h3", parent=article)
