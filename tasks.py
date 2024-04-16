@@ -71,12 +71,7 @@ def main():
         time_of_post = extract_before_ellipsis(excert.text)
         print( time_of_post)
         print("TTTTTTT")
-    def extract_before_ellipsis(text):
-        # Split the text at '...'
-        parts = text.split(" ...")
-        # Take the first part, before the '...'
-        before_ellipsis = parts[0]
-        return before_ellipsis
+
     # for date, title in dates, titles:
     #     # Decode HTML entities in the title text
     #     decoded_title = html.unescape(title.text)
@@ -107,5 +102,11 @@ def main():
     
     # Close the browser
     browser.close_all_browsers()
+def extract_before_ellipsis(text):
+    # Split the text at '...'
+    parts = text.split(" ...")
+    # Take the first part, before the '...'
+    before_ellipsis = parts[0]
+    return before_ellipsis
 if __name__ == "__main__":
     main()
