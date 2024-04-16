@@ -69,6 +69,7 @@ def main():
     for excert in excerts:
         print("ONe-Two")
         print( excert)
+        print("TTTTTTT")
     # for date, title in dates, titles:
     #     # Decode HTML entities in the title text
     #     decoded_title = html.unescape(title.text)
