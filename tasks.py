@@ -55,9 +55,9 @@ def main():
         return
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
     browser.click_element(dropdown_locator)
-    browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
-    # Search result section
-    search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
+    # browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
+    # # Search result section
+    # search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
     # Use a relative XPath from the context of 'search_list_selector'
     # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
     
@@ -67,6 +67,9 @@ def main():
 
     is_there_ShowMore = True
     while is_there_ShowMore:
+        browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
+        # Search result section
+        search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
         articles = browser.find_elements("tag:article", parent=search_list_selector)
         # articles = search_list_selector.find_elements("xpath:.//[article")
 
@@ -87,8 +90,10 @@ def main():
         try:
              button = browser.find_elements("tag:button", parent=search_list_selector)
              browser.click_element(button)
+             print("Botton Clicked")
             # //span[@aria-hidden='true'][normalize-space()='Show more']
         except Exception as e: 
+            print("Botton NOT Clicked")
             is_there_ShowMore = False
 
         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
@@ -139,19 +144,20 @@ def formated_article_date(date_extracted):
     possible_hms = ["second", "seconds","min\xadutes","minute", "minutes", "hour","hours"]
     possible_days = ["day", "days"]
     current_date = datetime.now()
-  
-    if(date_extracted.split(" ")[1]) in possible_hms:
-        date_object = current_date
-    elif date_extracted.split(" ")[1] in possible_days:
-         # Split the expression to extract the number of days
-        num_days = int(date_extracted.split()[0])
-        # Calculate the target date by subtracting the number of days from the current date
-        date_object = current_date - timedelta(days=num_days)
-    else:
-        # Convert the date string to a datetime object
-        date_object = datetime.strptime(date_extracted, "%B %d, %Y")
-        # Format the datetime object to the desired format
-    
+    try:   
+        if(date_extracted.split(" ")[1]) in possible_hms:
+            date_object = current_date
+        elif date_extracted.split(" ")[1] in possible_days:
+            # Split the expression to extract the number of days
+            num_days = int(date_extracted.split()[0])
+            # Calculate the target date by subtracting the number of days from the current date
+            date_object = current_date - timedelta(days=num_days)
+        else:
+            # Convert the date string to a datetime object
+            date_object = datetime.strptime(date_extracted, "%B %d, %Y")
+            # Format the datetime object to the desired format
+    except Exception as e:
+        return  
     formatted_date = date_object.strftime("%Y%m%d")
 
     return formatted_date
