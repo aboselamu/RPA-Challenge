@@ -72,7 +72,7 @@ def main():
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
     print("before Article")
-    if articles:
+    if search_list_selector:
         print("there is article")
     else:
         print("Article not found")
