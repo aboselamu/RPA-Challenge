@@ -72,6 +72,8 @@ def main():
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
     print("before Article")
+    if articles:
+        print("there is article")
     for article in articles:
         # getting information 
         excert = browser.find_element("tag:p",parent=article)
