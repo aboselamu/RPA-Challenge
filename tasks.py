@@ -63,7 +63,10 @@ def main():
     # Use a relative XPath from the context of 'search_list_selector'
     articles = browser.find_elements("tag:article", parent=search_list_selector)
     # articles = search_list_selector.find_elements("xpath:.//[article")
-    title = browser.find_element(".//div[2]/div[1]/h3", parent=articles)
+    for article in articles:
+        # Now 'article' is a single WebElement, which can be used as a parent
+        title = browser.find_element(".//div[2]/div[1]/h3", parent=article)
+        print(title.text "rrrrrrrrr")  # This will print the text of the title within each article
     # 
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     # titles = browser.find_elements(titles_xpath)
@@ -77,12 +80,12 @@ def main():
         print( time_of_post)
         print("TTTTTTT")
 
-    for title in  titles:
-        # Decode HTML entities in the title text
-        decoded_title = html.unescape(title.text)
-        # Further clean the title text if necessary
-        clean_title = decoded_title.replace("&shy;", "")
-        print("KOMan " + clean_title)
+    # for title in  titles:
+    #     # Decode HTML entities in the title text
+    #     decoded_title = html.unescape(title.text)
+    #     # Further clean the title text if necessary
+    #     clean_title = decoded_title.replace("&shy;", "")
+    #     print("KOMan " + clean_title)
         
     print(str(len(articles))+ " > This is Selamu's output")
     
