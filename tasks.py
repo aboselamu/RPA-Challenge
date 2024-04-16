@@ -64,11 +64,12 @@ def main():
     articles = browser.find_elements("tag:article", parent=search_list_selector)
     # articles = search_list_selector.find_elements("xpath:.//[article")
     for article in articles:
-        
+        # 
         # Now 'article' is a single WebElement, which can be used as a parent
         title= browser.find_elements("tag:h3", parent=article)
         # title = article.find_element(".//div[2]/div[1]/h3")
-        print(title.text, "rrrrrrrrr")  # This will print the text of the title within each article
+        print("Title now")
+        print(title)  # This will print the text of the title within each article
     # 
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     # titles = browser.find_elements(titles_xpath)
