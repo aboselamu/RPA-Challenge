@@ -74,7 +74,7 @@ def main():
     print("before Article")
     if search_list_selector:
         print(articles)
-        print(type(article), "ggg")
+        print(type(articles), "ggg")
     else:
         print("Article not found")
     for article in articles:
