@@ -73,7 +73,8 @@ def main():
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
     print("before Article")
     if search_list_selector:
-        print("there is article")
+        print(articles)
+        print(type(article), "ggg")
     else:
         print("Article not found")
     for article in articles:
