@@ -74,6 +74,8 @@ def main():
     print("before Article")
     if articles:
         print("there is article")
+    else:
+        print("Article not found")
     for article in articles:
         # getting information 
         excert = browser.find_element("tag:p",parent=article)
