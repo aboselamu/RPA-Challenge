@@ -76,7 +76,7 @@ def main():
         print(description)
         # Tes Â­la.."
         s = "RoÂ­han PaÂ­tel,"
-        s.replace("Â\xad","")
+        s.replace("Â\xad","hj") 
         print(s)
 
         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
