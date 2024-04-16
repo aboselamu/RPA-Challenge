@@ -63,11 +63,11 @@ def main():
     titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     titles = browser.find_elements(titles_xpath)
     
-    excerts_path = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[2]/div/p/text()[1]"
+    excerts_path = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[2]/div/p"
     # date_path = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/footer/div/div/div/div/span"
     excerts = browser.find_elements(excerts_path)
     for excert in excert:
-        print("MMM" + excert.text[10])
+        print( excert)
     # for date, title in dates, titles:
     #     # Decode HTML entities in the title text
     #     decoded_title = html.unescape(title.text)
