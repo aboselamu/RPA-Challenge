@@ -49,7 +49,7 @@ def main():
     locator1 = "//button[@aria-pressed='false']//*[name()='svg']"
     browser.wait_until_page_contains_element(locator1, timeout=10)
     browser.click_element(locator1)
-    browser.input_text("//input[@placeholder='Search']",'Busdkfjdkfiness',)
+    browser.input_text("//input[@placeholder='Search']",'Businees',)
     browser.click_button("//button[@aria-label='Search Al Jazeera']")
     # browser.click_element("//select[@id='search-sort-option']")
     try:
@@ -76,7 +76,6 @@ def main():
         # getting information 
         excert = browser.find_element("tag:p",parent=article)
         time_of_post, description  = extract_before_ellipsis(excert.text)
-        sdjlfk
         print(time_of_post, " SElamu")
         article_date = formated_article_date(time_of_post)
         print(article_date, target_date,)
