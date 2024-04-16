@@ -75,7 +75,7 @@ def main():
         print( time_of_post)
         print(description)
         test_mes = "TesÂ­la.."
-        print(type("Â"), type(test_mes[3]),len(test_mes))
+        print(type("Â"), (test_mes[4]),len(test_mes))
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     
     # titles = browser.find_elements(titles_xpath)    
@@ -125,5 +125,8 @@ def extract_before_ellipsis(text):
     description_part.replace("Â","")
 
     return date_part, description_part
+def date_format(val):
+    possible_dates = {0:["seconds ago", "minutes ago","hours ago","days ago"]}
+
 if __name__ == "__main__":
     main()
