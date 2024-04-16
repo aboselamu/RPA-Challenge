@@ -66,10 +66,10 @@ def main():
     for article in articles:
         # 
         # Now 'article' is a single WebElement, which can be used as a parent
-        title= browser.find_elements("tag:h3", parent=article).text
+        title= browser.find_element("tag:h3", parent=article)
         # title = article.find_element(".//div[2]/div[1]/h3")
         print("Title now")
-        print(title)  # This will print the text of the title within each article
+        print(title.text)  # This will print the text of the title within each article
     # 
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     # titles = browser.find_elements(titles_xpath)
