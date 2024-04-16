@@ -76,6 +76,7 @@ def main():
         # getting information 
         excert = browser.find_element("tag:p",parent=article)
         time_of_post, description  = extract_before_ellipsis(excert.text)
+        print(time_of_post, " SElamu")
         article_date = formated_article_date(time_of_post)
         if is_within_time_frame(article_date, target_date):
             # Now 'article' is a single WebElement, which can be used as a parent
@@ -109,7 +110,7 @@ def main():
     # Close the browser
     browser.close_all_browsers()
 
-    
+
 def extract_before_ellipsis(text):
     if len(text) <=0:
         return 
