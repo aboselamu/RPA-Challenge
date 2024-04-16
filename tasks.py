@@ -60,33 +60,36 @@ def main():
     search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
     # Use a relative XPath from the context of 'search_list_selector'
     # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
-    articles = browser.find_elements("tag:article", parent=search_list_selector)
-    # articles = search_list_selector.find_elements("xpath:.//[article")
-
+    
     num_months_ago = 1
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
-    print("before Article")
-    if search_list_selector:
-        print(articles)
-        print(type(articles), "ggg")
-    else:
-        print("Article not found")
-    for article in articles:
-        # getting information 
-        excert = browser.find_element("tag:p",parent=article)
-        time_of_post, description  = extract_before_ellipsis(excert.text)
-        print(time_of_post, " SElamu")
-        article_date = formated_article_date(time_of_post)
-        print(article_date, target_date,)
-        if is_within_time_frame(article_date, target_date):
-            # Now 'article' is a single WebElement, which can be used as a parent
-            title= browser.find_element("tag:h3", parent=article)
-            print("Title now")
-            print(title.text) # This will print the text of the title within each article
-            print( time_of_post, article_date)
-            print(description)
-            print("ONe article ends here")
+
+    is_there_ShowMore = True
+    while is_there_ShowMore:
+        articles = browser.find_elements("tag:article", parent=search_list_selector)
+        # articles = search_list_selector.find_elements("xpath:.//[article")
+
+        for article in articles:
+            # getting information 
+            excert = browser.find_element("tag:p",parent=article)
+            time_of_post, description  = extract_before_ellipsis(excert.text)
+            article_date = formated_article_date(time_of_post)
+            print(article_date, target_date,)
+            if is_within_time_frame(article_date, target_date):
+                # Now 'article' is a single WebElement, which can be used as a parent
+                title= browser.find_element("tag:h3", parent=article)
+                print("Title now")
+                print(title.text) # This will print the text of the title within each article
+                print( time_of_post, article_date)
+                print(description)
+                print("ONe article ends here")
+        try:
+             button = browser.find_elements("tag:button", parent=search_list_selector)
+             browser.click_element(button)
+            # //span[@aria-hidden='true'][normalize-space()='Show more']
+        except Exception as e: 
+            is_there_ShowMore = False
 
         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
