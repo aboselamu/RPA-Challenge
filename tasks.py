@@ -20,7 +20,7 @@ def process_news():
     work_items = WorkItems()
     if not work_items.inputs:
         print("No input work items available.")
-        return
+        pass
 
     for item in work_items.inputs:
         with item:
