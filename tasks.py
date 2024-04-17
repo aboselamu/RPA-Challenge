@@ -1,4 +1,5 @@
 # import html
+import time
 from datetime import datetime, timedelta
 from datetime import datetime
 from robocorp.tasks import task
@@ -72,7 +73,7 @@ def main():
         search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
         articles = browser.find_elements("tag:article", parent=search_list_selector)
         # articles = search_list_selector.find_elements("xpath:.//[article")
-
+        button = browser.find_element("xpath=//span[@aria-hidden='true'][normalize-space()='Show more']")
         for article in articles:
             # getting information 
             excert = browser.find_element("tag:p",parent=article)
@@ -88,9 +89,10 @@ def main():
                 print(description)
                 print("ONe article ends here")
 # try:
-        button = browser.find_element("xpath=//span[@aria-hidden='true'][normalize-space()='Show more']")
+        
     #  button = browser.find_element("tag:button", parent=search_list_selector)
         browser.click_element(button)
+        time.sleep(20)
         print("Botton Clicked")
     # 
 # except Exception as e: 
