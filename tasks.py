@@ -15,7 +15,7 @@ from RPA.Browser.Selenium import Selenium
 # import re
 
 @task
-def opening_the_news_Site(link):
+def opening_the_news_Site():
     browser = Selenium()
     
     # Define Chrome options to disable popup blocking
