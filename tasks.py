@@ -12,9 +12,20 @@ from RPA.Browser.Selenium import Selenium
 # from RPA.Excel.Files import Files as Excel
 # import re
 
-@task
-def opening_the_news_Site(link):
-    pass
+# @task
+# def opening_the_news_Site(link):
+    # browser = Selenium()
+    
+    # # Define Chrome options to disable popup blocking
+    # options = [
+    #     "--disable-popup-blocking",
+    #     "--ignore-certificate-errors"
+    # ]
+    # secrets =vault.get_secret('aljazeersite') 
+
+    # # Open browser with specified options
+    # browser.open_available_browser(secrets["url"], browser_selection="Chrome", options=options)
+    # pass
 
 @task
 def main():
@@ -41,6 +52,8 @@ def main():
     #     search_phrase = item.payload["search_phrase"]
     #     news_category = item.payload["news_category"]
     #     number_of_months = item.payload["number_of_months"]
+
+    # opening_the_news_Site()
 
     # Open the browser with the specified options
     # browser.open_available_browser('https://example.com', options=options)
