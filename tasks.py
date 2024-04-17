@@ -243,8 +243,8 @@ def is_within_time_frame(article_date, target_date):
     # Convert article date string to a datetime object
     try:
         article_datetime = datetime.strptime(article_date, "%Y%m%d")
-    except:
-        return False
+    except Exception as e:
+        return e, False
     # Check if the article date is within the time frame (since the target date)
     return article_datetime  >= target_date
 
