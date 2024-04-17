@@ -196,7 +196,7 @@ def main():
     # excel.close()
     
     # Close the browser
-    browser.close_all_browsers()
+    # browser.close_all_browsers()
 
 
 
