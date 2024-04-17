@@ -13,6 +13,10 @@ from RPA.Browser.Selenium import Selenium
 # import re
 
 @task
+def opening_the_news_Site(link):
+    pass
+
+@task
 def main():
     browser = Selenium()
     
@@ -233,8 +237,8 @@ def formated_article_date(date_extracted):
             formatted_date= date_object.strftime("%Y%m%d")
             return formatted_date
 
-    except:
-            return None
+    except Exception as e:
+            return e, None
 def is_within_time_frame(article_date, target_date):
     # Convert article date string to a datetime object
     try:
