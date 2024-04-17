@@ -114,6 +114,8 @@ def main():
         # button = browser.find_element("xpath=//span[@aria-hidden='true'][normalize-space()='Show more']")
         for article in articles:
             # getting information 
+            # //*[@id="main-content-area"]/div[2]/div[2]/article[1]/div[3]/div/div/img
+            # //*[@id="main-content-area"]/div[2]/div[2]/article[2]/div[3]/div/div/img
             excert = browser.find_element("tag:p",parent=article)
             time_of_post, description  = extract_before_ellipsis(excert.text)
             article_date = formated_article_date(time_of_post)
@@ -125,9 +127,15 @@ def main():
                 title= browser.find_element("tag:h3", parent=article)
                 if title.text not in articles_titiles:
                     articles_titiles.append(title.text)
+                    image = browser.find_element(locator="tag:img", parent=article)
+                    image_url = image.get_attribute('src')
                     print("Title now")
+                    print(image_url)  # Or perform further actions with the image URL.
+                    
+                    # print(image.scr)
                     print(title.text) # This will print the text of the title within each article
                     print( time_of_post, article_date)
+
                     print(description)
                     print("ONe article ends here")
         # time.sleep(2)
