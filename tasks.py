@@ -89,7 +89,7 @@ def main():
     # Use a relative XPath from the context of 'search_list_selector'
     # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
     
-    num_months_ago = 2
+    num_months_ago = 1
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
 
@@ -98,10 +98,11 @@ def main():
     is_there_ShowMore = True
 
     articles_titiles = []
+    browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
     while is_there_ShowMore:
         
         # Search result section
-        browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
+        
         search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
         articles = browser.find_elements("tag:article", parent=search_list_selector)
         button_locator = browser.find_elements("tag:button", parent=search_list_selector)
@@ -142,7 +143,7 @@ def main():
             browser.wait_until_element_is_enabled(button_locator, timeout=10)
 
             browser.click_button(button_locator)
-            time.sleep(10)
+            time.sleep(5)
             print("Botton Clicked")
     
         except Exception as e: 
