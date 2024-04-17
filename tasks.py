@@ -89,7 +89,7 @@ def main():
         # Search result section
         
         articles = browser.find_elements("tag:article", parent=search_list_selector)
-        button1 = browser.find_elements("tag:button", parent=search_list_selector)
+        button_locator = browser.find_elements("tag:button", parent=search_list_selector)
         
         # # articles = search_list_selector.find_elements("xpath:.//[article")
         # //*[@id="main-content-area"]/div[2]/div[2]/article[10]
