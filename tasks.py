@@ -115,7 +115,7 @@ def main():
         #  button = browser.find_element("tag:button", parent=search_list_selector)
             # Scroll the element into view
         browser.scroll_element_into_view(button_locator)
-        browser.click_button(button)
+        browser.click_button(button_locator)
         time.sleep(20)
         print("Botton Clicked")
     
