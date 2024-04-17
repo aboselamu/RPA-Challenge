@@ -16,7 +16,21 @@ from RPA.Browser.Selenium import Selenium
 def main():
     # Initialize work items and browser
     # work_items = WorkItems()
+
+    
     browser = Selenium(auto_close = False)
+    # Define browser options
+    options = {
+        "args": [
+            "--disable-popup-blocking",
+            "--ignore-certificate-errors",
+            "--start-maximized"
+        ]
+    }
+
+    # Open the browser with the specified options
+    # browser.open_available_browser('https://example.com', options=options)
+
     secrets =vault.get_secret('aljazeersite') 
     # excel = Excel()
     
@@ -32,7 +46,7 @@ def main():
     #     number_of_months = item.payload["number_of_months"]
         
         # Implement web scraping logic here
-    browser.open_available_browser("https://www.aljazeera.com/",maximized=True)
+    browser.open_available_browser(secrets("url"), options=options)
     # browser.open_available_browser(secrets['url'],maximized=True)
     try:
         browser.click_button('Allow all')
@@ -170,6 +184,7 @@ def is_within_time_frame(article_date, target_date):
     article_datetime = datetime.strptime(article_date, "%Y%m%d")
     # Check if the article date is within the time frame (since the target date)
     return article_datetime  >= target_date
+
 
 
 # def get_previous_month_date(date_string, num_months):
