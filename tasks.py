@@ -14,39 +14,8 @@ from RPA.Browser.Selenium import Selenium
 # from RPA.Excel.Files import Files as Excel
 # import re
 
-# @task
-# def opening_the_news_Site(link):
-    # browser = Selenium()
-    
-    # # Define Chrome options to disable popup blocking
-    # options = [
-    #     "--disable-popup-blocking",
-    #     "--ignore-certificate-errors"
-    # ]
-    # secrets =vault.get_secret('aljazeersite') 
-
-    # # Open browser with specified options
-    # browser.open_available_browser(secrets["url"], browser_selection="Chrome", options=options)
-    # pass
-
-# @task
-# def search_the_phrase(phrase):
-#     # 
-#     try:
-#         browser.click_button('Allow all')
-
-#     except:
-#         pass
-#         # Perform search, navigate, and extract data
-#     # site-header__search-trigger
-#     locator1 = "//button[@aria-pressed='false']//*[name()='svg']"
-#     browser.wait_until_page_contains_element(locator1, timeout=10)
-#     browser.click_element(locator1)
-#     browser.input_text("//input[@placeholder='Search']",phrase)
-#     browser.click_button("//button[@aria-label='Search Al Jazeera']")
-
 @task
-def main():
+def opening_the_news_Site(link):
     browser = Selenium()
     
     # Define Chrome options to disable popup blocking
@@ -54,41 +23,15 @@ def main():
         "--disable-popup-blocking",
         "--ignore-certificate-errors"
     ]
-    
-
-    
     secrets =vault.get_secret('aljazeersite') 
 
     # Open browser with specified options
     browser.open_available_browser(secrets["url"], browser_selection="Chrome", options=options)
+    pass
 
-    # Initialize work items and browser
-    # work_items = WorkItems()
-
-    # Process each input work item
-    # for item in work_items.inputs:
-    #     search_phrase = item.payload["search_phrase"]
-    #     news_category = item.payload["news_category"]
-    #     number_of_months = item.payload["number_of_months"]
-
-    # opening_the_news_Site()
-
-    # Open the browser with the specified options
-    # browser.open_available_browser('https://example.com', options=options)
-
-    
-    # excel = Excel()
-    
-    # # Open the Excel file to store data
-    # excel.create_workbook("news_data.xlsx")
-    # excel.rename_worksheet("Sheet", "Data")
-    # excel.append_row(["Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"])
-    
-
-        
-        # Implement web scraping logic here
-    # browser.open_available_browser(secrets["url"])
-    # browser.open_available_browser(secrets['url'],maximized=True)
+@task
+def search_the_phrase(phrase):
+    # 
     try:
         browser.click_button('Allow all')
 
@@ -99,9 +42,8 @@ def main():
     locator1 = "//button[@aria-pressed='false']//*[name()='svg']"
     browser.wait_until_page_contains_element(locator1, timeout=10)
     browser.click_element(locator1)
-    browser.input_text("//input[@placeholder='Search']",'Business',)
+    browser.input_text("//input[@placeholder='Search']",phrase)
     browser.click_button("//button[@aria-label='Search Al Jazeera']")
-    # browser.click_element("//select[@id='search-sort-option']")
     try:
         locator2 = "//select[@id='search-sort-option']"
         browser.wait_until_element_is_visible(locator2, timeout=10)
@@ -111,12 +53,8 @@ def main():
         return
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
     browser.click_element(dropdown_locator)
-    # browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
-    # # Search result section
-    # search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
-    # Use a relative XPath from the context of 'search_list_selector'
-    # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
-    
+@task
+def retrive_data(num_months_ago):
     num_months_ago = 1
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
@@ -195,6 +133,48 @@ def main():
             print(e, "Error")
             is_there_ShowMore = False
 
+@task
+def main():
+
+    # Initialize work items and browser
+    # work_items = WorkItems()
+
+    # Process each input work item
+    # for item in work_items.inputs:
+    #     search_phrase = item.payload["search_phrase"]
+    #     news_category = item.payload["news_category"]
+    #     number_of_months = item.payload["number_of_months"]
+
+    search_phrase="Business"
+    num_months_ago = 1
+    opening_the_news_Site()
+    search_the_phrase(search_phrase)
+    retrive_data(num_months_ago)
+    # Open the browser with the specified options
+    # browser.open_available_browser('https://example.com', options=options)
+
+    
+    # excel = Excel()
+    
+    # # Open the Excel file to store data
+    # excel.create_workbook("news_data.xlsx")
+    # excel.rename_worksheet("Sheet", "Data")
+    # excel.append_row(["Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"])
+    
+
+        
+        # Implement web scraping logic here
+    # browser.open_available_browser(secrets["url"])
+    # browser.open_available_browser(secrets['url'],maximized=True)
+    
+
+    # browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
+    # # Search result section
+    # search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
+    # Use a relative XPath from the context of 'search_list_selector'
+    # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
+    
+   
         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
     
