@@ -123,14 +123,19 @@ def main():
                 print( time_of_post, article_date)
                 print(description)
                 print("ONe article ends here")
+        time.sleep(5)
+        try:
+            ads_locator = browser.find_element("xpath=//button[@aria-label='Close Ad']")
+            browser.click_button(ads_locator) 
+        except Exception as e:
+            print(e,"My massege> NO Adds Found")
         try: 
         
         #  button = browser.find_element("tag:button", parent=search_list_selector)
             # Scroll the element into view
             browser.scroll_element_into_view(button_locator)
             browser.wait_until_element_is_enabled(button_locator, timeout=10)
-            ads_locator = browser.find_element("xpath=//button[@aria-label='Close Ad']")
-            browser.click_button(ads_locator) 
+
             browser.click_button(button_locator)
             time.sleep(20)
             print("Botton Clicked")
