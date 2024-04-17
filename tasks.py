@@ -1,7 +1,7 @@
 # import html
 import time
 import requests
-from robocorp.log import logger
+import logging
 from pathlib import Path
 from datetime import datetime, timedelta
 from datetime import datetime
@@ -11,7 +11,7 @@ from robocorp import vault
 from robocorp.tasks import get_output_dir
 
 from RPA.Browser.Selenium import Selenium 
-
+logger = logging.getLogger(__name__)
 # from RPA.Excel.Files import Files as Excel
 # import re
 
