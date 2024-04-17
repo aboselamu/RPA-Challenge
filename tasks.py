@@ -149,7 +149,9 @@ def main():
     logger.info("Starting the main task.")
     # Initialize work items and browser
     work_items = WorkItems()
-
+    if not work_items.inputs:
+        print("No input work items available.")
+        return 
     # Process each input work item
     current_item = work_items.inputs.current
     search_phrase = current_item.payload.get("search_phrase")
