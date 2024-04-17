@@ -97,12 +97,13 @@ def main():
     search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
     # print(len(search_list_selector))
     is_there_ShowMore = True
+    articles = browser.find_elements("tag:article", parent=search_list_selector)
+    button_locator = browser.find_elements("tag:button", parent=search_list_selector)
     while is_there_ShowMore:
         
         # Search result section
         
-        articles = browser.find_elements("tag:article", parent=search_list_selector)
-        button_locator = browser.find_elements("tag:button", parent=search_list_selector)
+
         
         # # articles = search_list_selector.find_elements("xpath:.//[article")
         # //*[@id="main-content-area"]/div[2]/div[2]/article[10]
@@ -129,6 +130,7 @@ def main():
             browser.click_button(ads_locator) 
         except Exception as e:
             print(e,"My massege> NO Adds Found")
+            pass
         try: 
         
         #  button = browser.find_element("tag:button", parent=search_list_selector)
@@ -137,7 +139,7 @@ def main():
             browser.wait_until_element_is_enabled(button_locator, timeout=10)
 
             browser.click_button(button_locator)
-            time.sleep(20)
+            time.sleep(10)
             print("Botton Clicked")
     
         except Exception as e: 
