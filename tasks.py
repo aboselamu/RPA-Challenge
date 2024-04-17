@@ -156,10 +156,10 @@ def main():
     # current_item = work_items.inputs.current
     # search_phrase = current_item.payload.get("search_phrase")
     # number_of_months = current_item.payload.get("number_of_months")
-    for item in work_items.inputs:
-        search_phrase = item.payload["search_phrase"]
-        # news_category = item.payload["news_category"]
-        number_of_months = item.payload["number_of_months"]
+    # for item in work_items.inputs:
+    search_phrase = work_items.inputs.payload["search_phrase"]
+    # news_category = item.payload["news_category"]
+    number_of_months = work_items.inputs.payload["number_of_months"]
 
     # search_phrase="Business"
     # excel = Excel()
