@@ -46,7 +46,7 @@ def main():
     #     number_of_months = item.payload["number_of_months"]
         
         # Implement web scraping logic here
-    browser.open_available_browser(secrets("url"), options=options)
+    browser.open_available_browser(secrets["url"], options=options)
     # browser.open_available_browser(secrets['url'],maximized=True)
     try:
         browser.click_button('Allow all')
