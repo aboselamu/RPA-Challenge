@@ -114,7 +114,7 @@ def main():
             excert = browser.find_element("tag:p",parent=article)
             time_of_post, description  = extract_before_ellipsis(excert.text)
             article_date = formated_article_date(time_of_post)
-            print(article_date, target_date,)
+            # print(article_date, target_date,)
             if is_within_time_frame(article_date, target_date):
                 # Now 'article' is a single WebElement, which can be used as a parent
                 title= browser.find_element("tag:h3", parent=article)
@@ -206,14 +206,17 @@ def formated_article_date(date_extracted):
             date_object = datetime.strptime(date_extracted, "%B %d, %Y")
             # Format the datetime object to the desired format
     except Exception as e:
-        return  
+        return date_extracted
     formatted_date = date_object.strftime("%Y%m%d")
 
     return formatted_date
 
 def is_within_time_frame(article_date, target_date):
     # Convert article date string to a datetime object
-    article_datetime = datetime.strptime(article_date, "%Y%m%d")
+    try:
+        article_datetime = datetime.strptime(article_date, "%Y%m%d")
+    except:
+        return False
     # Check if the article date is within the time frame (since the target date)
     return article_datetime  >= target_date
 
