@@ -82,7 +82,7 @@ def main():
 
     browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
     search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
-    print(len())
+    print(len(search_list_selector))
     is_there_ShowMore = True
     while is_there_ShowMore:
         
@@ -112,7 +112,9 @@ def main():
                 print("ONe article ends here")
 # try:
         
-    #  button = browser.find_element("tag:button", parent=search_list_selector)
+        #  button = browser.find_element("tag:button", parent=search_list_selector)
+            # Scroll the element into view
+        browser.scroll_element_into_view(button_locator)
         browser.click_button(button)
         time.sleep(20)
         print("Botton Clicked")
