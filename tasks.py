@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from datetime import datetime
 from robocorp.tasks import task
 # from robocorp.workitems import WorkItems
-from robocorp import, vault
+from robocorp import vault
 from robocorp.tasks import get_output_dir
 
 from RPA.Browser.Selenium import Selenium 
