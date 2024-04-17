@@ -55,6 +55,7 @@ def search_the_phrase(browser, phrase):
         return
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
     browser.click_element(dropdown_locator)
+
 @task
 def retrive_data(browser, num_months_ago):
     logger.info(f"Retrieving data from {num_months_ago} months ago.")
@@ -136,33 +137,39 @@ def retrive_data(browser, num_months_ago):
             print(e, "Error")
             is_there_ShowMore = False
 
+# def save_data_to_Excel(excel):
+
+#     # Open the Excel file to store data
+#     excel.create_workbook("news_data.xlsx")
+#     excel.rename_worksheet("Sheet", "Data")
+#     excel.append_row(["Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"])
+
 @task
 def main():
     logger.info("Starting the main task.")
     # Initialize work items and browser
-    # work_items = WorkItems()
+    work_items = WorkItems()
 
     # Process each input work item
-    # for item in work_items.inputs:
-    #     search_phrase = item.payload["search_phrase"]
-    #     news_category = item.payload["news_category"]
-    #     number_of_months = item.payload["number_of_months"]
+    for item in work_items.inputs:
+        search_phrase = item.payload["search_phrase"]
+        news_category = item.payload["news_category"]
+        number_of_months = item.payload["number_of_months"]
 
-    search_phrase="Business"
-    num_months_ago = 1
+    # search_phrase="Business"
+    # excel = Excel()
+    # num_months_ago = 1
     browser_instance = opening_the_news_Site()
     search_the_phrase(browser_instance, search_phrase)
     retrive_data(browser_instance, num_months_ago)
+    
+
+    
     # Open the browser with the specified options
     # browser.open_available_browser('https://example.com', options=options)
 
     
-    # excel = Excel()
-    
-    # # Open the Excel file to store data
-    # excel.create_workbook("news_data.xlsx")
-    # excel.rename_worksheet("Sheet", "Data")
-    # excel.append_row(["Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"])
+
     
 
         
