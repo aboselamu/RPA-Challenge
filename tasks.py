@@ -149,26 +149,22 @@ def retrive_data(browser, num_months_ago):
 def main():
     logger.info("Starting the main task.")
     # Initialize work items and browser
-    work_items = WorkItems()
-    # ser = (storage.get_text("websites_to_monitor"))
-    # print(websites)
-    # for website in websites:
-    #     workitems.outputs.create(payload={"website": website})
-    # if not work_items.inputs:
-    #     print("No input work items available.")
-    #     return
-    # # Process each input work item
-    # current_item = work_items.inputs.current
-    # search_phrase = current_item.payload.get("search_phrase")
-    # number_of_months = current_item.payload.get("number_of_months")
-    # for item in work_items.inputs:
-    search_phrase = work_items.inputs.payload["search_phrase"]
-    # news_category = item.payload["news_category"]
-    number_of_months = work_items.inputs.payload["number_of_months"]
+    # Retrieve the text content from the asset
+    content = storage.get_text("parameters")
 
-    # search_phrase="Business"
-    # excel = Excel()
-    # num_months_ago = 1
+    # Split the content into lines
+    topics_and_months = content.splitlines()
+    
+    for topic_and_month in topics_and_months:
+        # Assuming each line is "search_phrase,number_of_months"
+        search_phrase, number_of_months = topic_and_month.split(',')  y
+        
+        # Convert number_of_months to an integer
+        number_of_months = int(number_of_months.strip())
+        search_phrase = search_phrase.strip()
+        # Create an output work item with this data as the payload
+        workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
+        
     browser_instance = opening_the_news_Site()
     search_the_phrase(browser_instance, search_phrase)
     retrive_data(browser_instance, num_months_ago)
