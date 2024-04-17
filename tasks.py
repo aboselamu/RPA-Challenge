@@ -57,8 +57,14 @@ def search_the_phrase(browser, phrase):
     browser.click_element(dropdown_locator)
 
 @task
-def retrive_data(browser, num_months_ago):
+def retrive_data(browser, num_months_ago, search_phrase):
+
     logger.info(f"Retrieving data from {num_months_ago} months ago.")
+
+    # Declearing varibale to return the date
+    data ={}
+    counter = 0
+    # Handling the possible inputs
     if num_months_ago == 0:
         num_months_ago =1
     current_date = datetime.now()
@@ -87,14 +93,31 @@ def retrive_data(browser, num_months_ago):
             try:
                 # print(article_date, target_date,)
                 if is_within_time_frame(article_date, target_date):
+
                     # Now 'article' is a single WebElement, which can be used as a parent
+
                     title= browser.find_element("tag:h3", parent=article)
                     if title.text not in articles_titiles:
+                        updating
                         articles_titiles.append(title.text)
+                        
+                        # does the title or description contains money
+                        # checking how many times the search keyword apears in title and description
+                        no_of_search_phrase, contains = no_of_topic_and_money_amount(title.text, 
+                                                                            description, search_phrase)
+
+                        
                         image = browser.find_element(locator="tag:img", parent=article)
                         image_url = image.get_attribute('src')
+
                         picture_name = image_url.split("/")[-1]  # Extracting picture name from URL
                         output_path = Path(get_output_dir()) / picture_name
+
+                        data[counter] = [counter,title.text, article_date, description, 
+                                            picture_name, no_of_search_phrase, contains]
+                        #update counter
+                        counter+=1
+
                         print("Title now")
                         print(image_url)  # Or perform further actions with the image URL.
                         print(picture_name,"The name of the picuture")
@@ -127,18 +150,24 @@ def retrive_data(browser, num_months_ago):
         except Exception as e: 
             print(e, "Error")
             is_there_ShowMore = False
+    return data
 
 @task
-def save_data_to_Excel(excel):
+def save_data_to_Excel(excel, file):
 
-    # Open the Excel file to store data
-    excel.create_workbook("news_data.xlsx")
-    excel.rename_worksheet("Sheet", "Data")
-    excel.append_row(["Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"])
+    for i in range(len(file)):
+        excel.append_row(file[i])
 
 @task
 def main():
     logger.info("Starting the main task.")
+
+    excel = Excel()
+    # Open the Excel file to store data
+    excel.create_workbook("news_data.xlsx")
+    excel.rename_worksheet("Sheet", "Data")
+    excel.append_row(["No", "Title", "Date", "Description", "Picture Filename", 
+                            "Count", "Contains Money"])
 
     # Retrieve the text content from the asset
     content = storage.get_text("parameters")
@@ -157,9 +186,10 @@ def main():
         # workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
 
         browser_instance = opening_the_news_Site()
-        search_the_phrase(browser_instance, number_of_months)
-        retrive_data(browser_instance, number_of_months)
-    
+        search_the_phrase(browser_instance, search_phrase)
+        data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
+
+        save_data_to_Excel(data_retrieved, excel)
         
     print("This is Selamu's output")
         
@@ -234,3 +264,18 @@ def is_within_time_frame(article_date, target_date):
         return e, False
     # Check if the article date is within the time frame (since the target date)
     return article_datetime  >= target_date
+
+def no_of_topic_and_money_amount(title, description, search_phrase):
+    # Trying to find the number of times the title and description contains
+    countT = title.split(" ").count(search_phrase)
+    countD = description.split(" ").count(search_phrase)
+
+    # Regex pattern to match various money formats
+    pattern = r"\$\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?|\d+\s(?:dollars|USD)"
+    
+    # Find all matches in the text
+    matchesT = re.findall(pattern, title)
+    matchesD = re.findall(pattern, description)
+    
+    return matches
+    return countT + countD,  bool(matchesT + matchesD)
