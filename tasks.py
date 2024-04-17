@@ -40,8 +40,7 @@ def search_the_phrase(browser, phrase):
 
     except:
         pass
-        # Perform search, navigate, and extract data
-    # site-header__search-trigger
+        # finding the serach icon and field
     locator1 = "//button[@aria-pressed='false']//*[name()='svg']"
     browser.wait_until_page_contains_element(locator1, timeout=10)
     browser.click_element(locator1)
@@ -60,7 +59,8 @@ def search_the_phrase(browser, phrase):
 @task
 def retrive_data(browser, num_months_ago):
     logger.info(f"Retrieving data from {num_months_ago} months ago.")
-    num_months_ago = 1
+    if num_months_ago == 0:
+        num_months_ago =1
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
 
@@ -78,15 +78,7 @@ def retrive_data(browser, num_months_ago):
         articles = browser.find_elements("tag:article", parent=search_list_selector)
         button_locator = browser.find_elements("tag:button", parent=search_list_selector)
         
-        # # articles = search_list_selector.find_elements("xpath:.//[article")
-        # //*[@id="main-content-area"]/div[2]/div[2]/article[10]
-        # //*[@id="main-content-area"]/div[2]/div[2]/button
-        # //button[@class='show-more-button grid-full-width']
-        # button = browser.find_element("xpath=//span[@aria-hidden='true'][normalize-space()='Show more']")
         for article in articles:
-            # getting information 
-            # //*[@id="main-content-area"]/div[2]/div[2]/article[1]/div[3]/div/div/img
-            # //*[@id="main-content-area"]/div[2]/div[2]/article[2]/div[3]/div/div/img
             excert = browser.find_element("tag:p",parent=article)
             time_of_post, description  = extract_before_ellipsis(excert.text)
             article_date = formated_article_date(time_of_post)
@@ -124,8 +116,6 @@ def retrive_data(browser, num_months_ago):
             print(e,"My massege> NO Adds Found")
             pass
         try: 
-        
-        #  button = browser.find_element("tag:button", parent=search_list_selector)
             # Scroll the element into view
             browser.scroll_element_into_view(button_locator)
             browser.wait_until_element_is_enabled(button_locator, timeout=10)
@@ -167,7 +157,7 @@ def main():
 
         browser_instance = opening_the_news_Site()
         search_the_phrase(browser_instance, number_of_months)
-        retrive_data(browser_instance, num_months_ago)
+        retrive_data(browser_instance, number_of_months)
     
 
     
