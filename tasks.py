@@ -123,21 +123,21 @@ def main():
                 print( time_of_post, article_date)
                 print(description)
                 print("ONe article ends here")
-# try: 
+        try: 
         
         #  button = browser.find_element("tag:button", parent=search_list_selector)
             # Scroll the element into view
-        browser.scroll_element_into_view(button_locator)
-        browser.wait_until_element_is_enabled(button_locator, timeout=10)
-        ads_locator = browser.find_element("xpath=//button[@aria-label='Close Ad']")
-        browser.click_button(ads_locator) 
-        browser.click_button(button_locator)
-        time.sleep(20)
-        print("Botton Clicked")
+            browser.scroll_element_into_view(button_locator)
+            browser.wait_until_element_is_enabled(button_locator, timeout=10)
+            ads_locator = browser.find_element("xpath=//button[@aria-label='Close Ad']")
+            browser.click_button(ads_locator) 
+            browser.click_button(button_locator)
+            time.sleep(20)
+            print("Botton Clicked")
     
-# except Exception as e: 
-#     print(e, "Error")
-        is_there_ShowMore = False
+        except Exception as e: 
+            print(e, "Error")
+            is_there_ShowMore = False
 
         # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
     # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
