@@ -26,7 +26,7 @@ def opening_the_news_Site():
         "--disable-popup-blocking",
         "--ignore-certificate-errors"
     ]
-    secrets =vault.get_secret('aljazeersite') 
+    secrets =vault.get_secret('alijazeersite') 
 
     # Open browser with specified options
     browser.open_available_browser(secrets["url"], browser_selection="Chrome", options=options)
@@ -128,17 +128,18 @@ def retrive_data(browser, num_months_ago):
             print(e, "Error")
             is_there_ShowMore = False
 
-# def save_data_to_Excel(excel):
+@task
+def save_data_to_Excel(excel):
 
-#     # Open the Excel file to store data
-#     excel.create_workbook("news_data.xlsx")
-#     excel.rename_worksheet("Sheet", "Data")
-#     excel.append_row(["Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"])
+    # Open the Excel file to store data
+    excel.create_workbook("news_data.xlsx")
+    excel.rename_worksheet("Sheet", "Data")
+    excel.append_row(["Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"])
 
 @task
 def main():
     logger.info("Starting the main task.")
-    # Initialize work items and browser
+
     # Retrieve the text content from the asset
     content = storage.get_text("parameters")
 
@@ -159,25 +160,8 @@ def main():
         search_the_phrase(browser_instance, number_of_months)
         retrive_data(browser_instance, number_of_months)
     
-
-    
-    # Open the browser with the specified options
-    # browser.open_available_browser('https://example.com', options=options)
-
-    
-
-    
-
-        
-        # Implement web scraping logic here
-    # brows
-    #     clean_title = decoded_title.replace("&shy;", "")
-    #     print("KOMan " + clean_title)
         
     print("This is Selamu's output")
-        # For each news item extracted, process and store data in Excel
-        # Example row to append:
-        # excel.append_row([title, date, description, picture_filename, count, contains_money])
         
     # Save and close the Excel workbook
     # excel.save("output/news_data.xlsx")
@@ -250,21 +234,3 @@ def is_within_time_frame(article_date, target_date):
         return e, False
     # Check if the article date is within the time frame (since the target date)
     return article_datetime  >= target_date
-
-
-
-# def get_previous_month_date(date_string, num_months):
-#     # Convert the date string to a datetime object
-#     date_object = datetime.strptime(date_string, "%Y%m%d")
-    
-#     # Calculate the number of days to subtract based on the number of months
-#     days_to_subtract = num_months * 30
-    
-#     # Subtract the timedelta to get the previous month's date
-#     previous_month_date = date_object - timedelta(days=days_to_subtract)
-    
-#     return previous_month_date
-
-
-if __name__ == "__main__":
-    main()
