@@ -2,6 +2,15 @@
 # https://github.com/robocorp/rcc/blob/master/docs/recipes.md#what-is-in-robotyaml
 
 tasks:
+  main:
+    command:
+      - python
+      - -m
+      - robocorp.tasks
+      - run
+      - tasks.py
+      - -t
+      - main
   opening_the_news_Site:
     command:
       - python
