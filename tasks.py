@@ -27,10 +27,10 @@ def opening_the_news_Site():
 
     # Open browser with specified options
     browser.open_available_browser(secrets["url"], browser_selection="Chrome", options=options)
-    pass
+    return browser
 
 @task
-def search_the_phrase(phrase):
+def search_the_phrase(browser, phrase):
     # 
     try:
         browser.click_button('Allow all')
@@ -54,7 +54,7 @@ def search_the_phrase(phrase):
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
     browser.click_element(dropdown_locator)
 @task
-def retrive_data(num_months_ago):
+def retrive_data(browser, num_months_ago):
     num_months_ago = 1
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
@@ -147,9 +147,9 @@ def main():
 
     search_phrase="Business"
     num_months_ago = 1
-    opening_the_news_Site()
-    search_the_phrase(search_phrase)
-    retrive_data(num_months_ago)
+    browser_instance = opening_the_news_Site()
+    search_the_phrase(browser_instance, search_phrase)
+    retrive_data(browser_instance, num_months_ago)
     # Open the browser with the specified options
     # browser.open_available_browser('https://example.com', options=options)
 
