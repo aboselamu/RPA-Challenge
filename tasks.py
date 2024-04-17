@@ -27,6 +27,22 @@ from RPA.Browser.Selenium import Selenium
     # browser.open_available_browser(secrets["url"], browser_selection="Chrome", options=options)
     # pass
 
+# @task
+# def search_the_phrase(phrase):
+#     # 
+#     try:
+#         browser.click_button('Allow all')
+
+#     except:
+#         pass
+#         # Perform search, navigate, and extract data
+#     # site-header__search-trigger
+#     locator1 = "//button[@aria-pressed='false']//*[name()='svg']"
+#     browser.wait_until_page_contains_element(locator1, timeout=10)
+#     browser.click_element(locator1)
+#     browser.input_text("//input[@placeholder='Search']",phrase)
+#     browser.click_button("//button[@aria-label='Search Al Jazeera']")
+
 @task
 def main():
     browser = Selenium()
@@ -140,7 +156,7 @@ def main():
                         articles_titiles.append(title.text)
                         image = browser.find_element(locator="tag:img", parent=article)
                         image_url = image.get_attribute('src')
-                        picture_name = url.split("/")[-1]  # Extracting picture name from URL
+                        picture_name = image_url.split("/")[-1]  # Extracting picture name from URL
                         output_path = Path(get_output_dir()) / picture_name
                         print("Title now")
                         print(image_url)  # Or perform further actions with the image URL.
