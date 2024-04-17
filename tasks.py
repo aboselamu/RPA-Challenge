@@ -89,7 +89,7 @@ def main():
     # Use a relative XPath from the context of 'search_list_selector'
     # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
     
-    num_months_ago = 1
+    num_months_ago = 5
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
 
@@ -128,7 +128,7 @@ def main():
                     print( time_of_post, article_date)
                     print(description)
                     print("ONe article ends here")
-        time.sleep(5)
+        # time.sleep(2)
         try:
             ads_locator = browser.find_element("xpath=//button[@aria-label='Close Ad']")
             browser.click_button(ads_locator) 
