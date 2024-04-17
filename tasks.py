@@ -157,7 +157,7 @@ def main():
     
     for topic_and_month in topics_and_months:
         # Assuming each line is "search_phrase,number_of_months"
-        search_phrase, number_of_months = topic_and_month.split(',')  y
+        search_phrase, number_of_months = topic_and_month.split(',') 
         
         # Convert number_of_months to an integer
         number_of_months = int(number_of_months.strip())
@@ -180,25 +180,7 @@ def main():
 
         
         # Implement web scraping logic here
-    # browser.open_available_browser(secrets["url"])
-    # browser.open_available_browser(secrets['url'],maximized=True)
-    
-
-    # browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
-    # # Search result section
-    # search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
-    # Use a relative XPath from the context of 'search_list_selector'
-    # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
-    
-   
-        # print(type("Â"), test_mes[3:5], test_mes[4],len(test_mes))
-    # titles_xpath = "//*[@id='main-content-area']/div[2]/div[2]/article/div[2]/div[1]/h3"
-    
-    # titles = browser.find_elements(titles_xpath)    
-    # for title in  titles:
-    #     # Decode HTML entities in the title text
-    #     decoded_title = html.unescape(title.text)
-    #     # Further clean the title text if necessary
+    # brows
     #     clean_title = decoded_title.replace("&shy;", "")
     #     print("KOMan " + clean_title)
         
