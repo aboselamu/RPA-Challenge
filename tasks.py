@@ -22,6 +22,8 @@ def main():
         "--ignore-certificate-errors"
     ]
     
+
+    
     secrets =vault.get_secret('aljazeersite') 
 
     # Open browser with specified options
@@ -30,16 +32,11 @@ def main():
     # Initialize work items and browser
     # work_items = WorkItems()
 
-    
-    # browser = Selenium(auto_close = False)
-    # Define browser options
-    # options = {
-    #     "args": [
-    #         "--disable-popup-blocking",
-    #         "--ignore-certificate-errors",
-    #         "--start-maximized"
-    #     ]
-    # }
+    # Process each input work item
+    # for item in work_items.inputs:
+    #     search_phrase = item.payload["search_phrase"]
+    #     news_category = item.payload["news_category"]
+    #     number_of_months = item.payload["number_of_months"]
 
     # Open the browser with the specified options
     # browser.open_available_browser('https://example.com', options=options)
@@ -52,11 +49,7 @@ def main():
     # excel.rename_worksheet("Sheet", "Data")
     # excel.append_row(["Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"])
     
-    # # Process each input work item
-    # for item in work_items.inputs:
-    #     search_phrase = item.payload["search_phrase"]
-    #     news_category = item.payload["news_category"]
-    #     number_of_months = item.payload["number_of_months"]
+
         
         # Implement web scraping logic here
     # browser.open_available_browser(secrets["url"])
@@ -129,9 +122,12 @@ def main():
                     articles_titiles.append(title.text)
                     image = browser.find_element(locator="tag:img", parent=article)
                     image_url = image.get_attribute('src')
+                    picture_name = url.split("/")[-1]  # Extracting picture name from URL
+                    output_path = Path(get_output_dir()) / picture_name
                     print("Title now")
                     print(image_url)  # Or perform further actions with the image URL.
-                    
+                    print(picture_name,"The name of the picuture")
+                    print(output_path, "The output path of the picture")
                     # print(image.scr)
                     print(title.text) # This will print the text of the title within each article
                     print( time_of_post, article_date)
