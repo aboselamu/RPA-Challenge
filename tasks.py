@@ -163,11 +163,11 @@ def main():
         number_of_months = int(number_of_months.strip())
         search_phrase = search_phrase.strip()
         # Create an output work item with this data as the payload
-        workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
-        
-    browser_instance = opening_the_news_Site()
-    search_the_phrase(browser_instance, search_phrase)
-    retrive_data(browser_instance, num_months_ago)
+        # workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
+
+        browser_instance = opening_the_news_Site()
+        search_the_phrase(browser_instance, number_of_months)
+        retrive_data(browser_instance, num_months_ago)
     
 
     
