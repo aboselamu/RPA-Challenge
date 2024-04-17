@@ -25,7 +25,7 @@ def main():
     secrets =vault.get_secret('aljazeersite') 
 
     # Open browser with specified options
-    browser.open_available_browser(secrets["url"], browser="Chrome", options=options)
+    browser.open_available_browser(secrets["url"], browser_selection="Chrome", options=options)
 
     # Initialize work items and browser
     # work_items = WorkItems()
