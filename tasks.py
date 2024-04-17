@@ -1,6 +1,7 @@
 # import html
 import time
 import requests
+from robocorp.log import logger
 from pathlib import Path
 from datetime import datetime, timedelta
 from datetime import datetime
@@ -16,6 +17,7 @@ from RPA.Browser.Selenium import Selenium
 
 @task
 def opening_the_news_Site():
+    logger.info("Opening the news site.")
     browser = Selenium()
     
     # Define Chrome options to disable popup blocking
@@ -31,7 +33,7 @@ def opening_the_news_Site():
 
 @task
 def search_the_phrase(browser, phrase):
-    # 
+    logger.info(f"Searching the phrase: {phrase}")
     try:
         browser.click_button('Allow all')
 
@@ -55,6 +57,7 @@ def search_the_phrase(browser, phrase):
     browser.click_element(dropdown_locator)
 @task
 def retrive_data(browser, num_months_ago):
+    logger.info(f"Retrieving data from {num_months_ago} months ago.")
     num_months_ago = 1
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
@@ -135,7 +138,7 @@ def retrive_data(browser, num_months_ago):
 
 @task
 def main():
-
+    logger.info("Starting the main task.")
     # Initialize work items and browser
     # work_items = WorkItems()
 
