@@ -80,14 +80,22 @@ def main():
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
 
+    browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
+    search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
+    print(len())
     is_there_ShowMore = True
     while is_there_ShowMore:
-        browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
+        
         # Search result section
-        search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
+        
         articles = browser.find_elements("tag:article", parent=search_list_selector)
-        # articles = search_list_selector.find_elements("xpath:.//[article")
-        button = browser.find_element("xpath=//span[@aria-hidden='true'][normalize-space()='Show more']")
+        button1 = browser.find_elements("tag:button", parent=search_list_selector)
+        
+        # # articles = search_list_selector.find_elements("xpath:.//[article")
+        # //*[@id="main-content-area"]/div[2]/div[2]/article[10]
+        # //*[@id="main-content-area"]/div[2]/div[2]/button
+        # //button[@class='show-more-button grid-full-width']
+        # button = browser.find_element("xpath=//span[@aria-hidden='true'][normalize-space()='Show more']")
         for article in articles:
             # getting information 
             excert = browser.find_element("tag:p",parent=article)
@@ -105,10 +113,10 @@ def main():
 # try:
         
     #  button = browser.find_element("tag:button", parent=search_list_selector)
-        browser.click_element(button)
+        browser.click_button(button)
         time.sleep(20)
         print("Botton Clicked")
-    # 
+    
 # except Exception as e: 
 #     print(e, "Error")
         is_there_ShowMore = False
