@@ -89,7 +89,7 @@ def main():
     # Use a relative XPath from the context of 'search_list_selector'
     # articles = browser.find_elements("xpath=//*[@id='main-content-area']/div[2]/div[2]/article[1]")
     
-    num_months_ago = 1
+    num_months_ago = 2
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
 
