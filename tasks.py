@@ -6,13 +6,13 @@ from pathlib import Path
 from datetime import datetime, timedelta
 from datetime import datetime
 from robocorp.tasks import task
-from robocorp.workitems import WorkItems
+from RPA.Robocorp.WorkItems import WorkItems
 from robocorp import vault
 from robocorp.tasks import get_output_dir
+from RPA.Excel.Files import Files as Excel
 
 from RPA.Browser.Selenium import Selenium 
 logger = logging.getLogger(__name__)
-# from RPA.Excel.Files import Files as Excel
 # import re
 
 @task
