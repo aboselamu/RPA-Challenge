@@ -118,26 +118,30 @@ def main():
             article_date = formated_article_date(time_of_post)
             if(article_date == None):
                 continue
-            # print(article_date, target_date,)
-            if is_within_time_frame(article_date, target_date):
-                # Now 'article' is a single WebElement, which can be used as a parent
-                title= browser.find_element("tag:h3", parent=article)
-                if title.text not in articles_titiles:
-                    articles_titiles.append(title.text)
-                    image = browser.find_element(locator="tag:img", parent=article)
-                    image_url = image.get_attribute('src')
-                    picture_name = url.split("/")[-1]  # Extracting picture name from URL
-                    output_path = Path(get_output_dir()) / picture_name
-                    print("Title now")
-                    print(image_url)  # Or perform further actions with the image URL.
-                    print(picture_name,"The name of the picuture")
-                    print(output_path, "The output path of the picture")
-                    # print(image.scr)
-                    print(title.text) # This will print the text of the title within each article
-                    print( time_of_post, article_date)
+            try:
+                # print(article_date, target_date,)
+                if is_within_time_frame(article_date, target_date):
+                    # Now 'article' is a single WebElement, which can be used as a parent
+                    title= browser.find_element("tag:h3", parent=article)
+                    if title.text not in articles_titiles:
+                        articles_titiles.append(title.text)
+                        image = browser.find_element(locator="tag:img", parent=article)
+                        image_url = image.get_attribute('src')
+                        picture_name = url.split("/")[-1]  # Extracting picture name from URL
+                        output_path = Path(get_output_dir()) / picture_name
+                        print("Title now")
+                        print(image_url)  # Or perform further actions with the image URL.
+                        print(picture_name,"The name of the picuture")
+                        print(output_path, "The output path of the picture")
+                        # print(image.scr)
+                        print(title.text) # This will print the text of the title within each article
+                        print( time_of_post, article_date)
 
-                    print(description)
-                    print("ONe article ends here")
+                        print(description)
+                        print("ONe article ends here")
+            except Exception as e:
+                print(e, "Error now now")
+
         # time.sleep(2)
         try:
             ads_locator = browser.find_element("xpath=//button[@aria-label='Close Ad']")
