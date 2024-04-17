@@ -117,6 +117,8 @@ def main():
             excert = browser.find_element("tag:p",parent=article)
             time_of_post, description  = extract_before_ellipsis(excert.text)
             article_date = formated_article_date(time_of_post)
+            if(article_date == None):
+                continue
             # print(article_date, target_date,)
             if is_within_time_frame(article_date, target_date):
                 # Now 'article' is a single WebElement, which can be used as a parent
@@ -198,25 +200,37 @@ def formated_article_date(date_extracted):
     # possible hours, minutes and seconds
     possible_hms = ["second", "seconds","min\xadutes","minute", "minutes", "hour","hours"]
     possible_days = ["day", "days"]
+    possible_months_format_One =["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    possible_months_format_Two =["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     current_date = datetime.now()
     try:   
         if(date_extracted.split(" ")[1]) in possible_hms:
             date_object = current_date
+            formatted_date = date_object.strftime("%Y%m%d")
+            return formatted_date
         elif date_extracted.split(" ")[1] in possible_days:
             # Split the expression to extract the number of days
             num_days = int(date_extracted.split()[0])
             # Calculate the target date by subtracting the number of days from the current date
             date_object = current_date - timedelta(days=num_days)
-        else:
+            formatted_date = date_object.strftime("%Y%m%d")
+            return formatted_date
+        elif date_extracted.split(" ")[0] in possible_months_format_One:
             # Convert the date string to a datetime object
             date_object = datetime.strptime(date_extracted, "%B %d, %Y")
+    
             # Format the datetime object to the desired format
-    except Exception as e:
-        return date_extracted
-    formatted_date = date_object.strftime("%Y%m%d")
+            formatted_date = date_object.strftime("%Y%m%d")
+    
+            return formatted_date
+        elif date_extracted.split(" ")[0] in possible_months_format_Two:
+            # Convert the date string to a datetime object
+            date_object = datetime.strptime(date_extracted, "%b %d, %Y")
+            formatted_date= date_object.strftime("%Y%m%d")
+            return formatted_date
 
-    return formatted_date
-
+    except:
+            return None
 def is_within_time_frame(article_date, target_date):
     # Convert article date string to a datetime object
     try:
