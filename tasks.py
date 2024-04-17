@@ -82,7 +82,7 @@ def main():
 
     browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
     search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
-    print(len(search_list_selector))
+    # print(len(search_list_selector))
     is_there_ShowMore = True
     while is_there_ShowMore:
         
