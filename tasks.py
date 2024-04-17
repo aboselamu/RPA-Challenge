@@ -93,17 +93,18 @@ def main():
     current_date = datetime.now()
     target_date = current_date - timedelta(days=num_months_ago * 30)  # Assuming each month has 30 days
 
-    browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
-    search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
+
     # print(len(search_list_selector))
     is_there_ShowMore = True
-    articles = browser.find_elements("tag:article", parent=search_list_selector)
-    button_locator = browser.find_elements("tag:button", parent=search_list_selector)
+
+    articles_titiles = []
     while is_there_ShowMore:
         
         # Search result section
-        
-
+        browser.wait_until_element_is_visible("xpath://*[@id='main-content-area']/div[2]/div[2]", timeout=10)
+        search_list_selector = browser.find_element("xpath=//*[@id='main-content-area']/div[2]/div[2]")
+        articles = browser.find_elements("tag:article", parent=search_list_selector)
+        button_locator = browser.find_elements("tag:button", parent=search_list_selector)
         
         # # articles = search_list_selector.find_elements("xpath:.//[article")
         # //*[@id="main-content-area"]/div[2]/div[2]/article[10]
@@ -119,11 +120,13 @@ def main():
             if is_within_time_frame(article_date, target_date):
                 # Now 'article' is a single WebElement, which can be used as a parent
                 title= browser.find_element("tag:h3", parent=article)
-                print("Title now")
-                print(title.text) # This will print the text of the title within each article
-                print( time_of_post, article_date)
-                print(description)
-                print("ONe article ends here")
+                if title.text not in articles_titiles:
+                    articles_titiles.append(title.text)
+                    print("Title now")
+                    print(title.text) # This will print the text of the title within each article
+                    print( time_of_post, article_date)
+                    print(description)
+                    print("ONe article ends here")
         time.sleep(5)
         try:
             ads_locator = browser.find_element("xpath=//button[@aria-label='Close Ad']")
