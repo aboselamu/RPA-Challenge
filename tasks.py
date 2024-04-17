@@ -1,5 +1,7 @@
 # import html
 import time
+import requests
+from pathlib import Path
 from datetime import datetime, timedelta
 from datetime import datetime
 from robocorp.tasks import task
