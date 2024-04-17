@@ -3,6 +3,7 @@ import time
 import requests
 import logging
 from pathlib import Path
+from robocorp import storage
 from datetime import datetime, timedelta
 from datetime import datetime
 from robocorp.tasks import task
@@ -149,6 +150,10 @@ def main():
     logger.info("Starting the main task.")
     # Initialize work items and browser
     work_items = WorkItems()
+    # ser = (storage.get_text("websites_to_monitor"))
+    # print(websites)
+    # for website in websites:
+    #     workitems.outputs.create(payload={"website": website})
     # if not work_items.inputs:
     #     print("No input work items available.")
     #     return
