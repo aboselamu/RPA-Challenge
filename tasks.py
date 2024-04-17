@@ -186,7 +186,7 @@ def main():
     #     clean_title = decoded_title.replace("&shy;", "")
     #     print("KOMan " + clean_title)
         
-    print(str(" > This is Selamu's output")
+    print("This is Selamu's output")
         # For each news item extracted, process and store data in Excel
         # Example row to append:
         # excel.append_row([title, date, description, picture_filename, count, contains_money])
