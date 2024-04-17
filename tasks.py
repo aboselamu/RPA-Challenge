@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from datetime import datetime
 from robocorp.tasks import task
 # from robocorp.workitems import WorkItems
-from robocorp import browser, vault
+from robocorp import, vault
 from robocorp.tasks import get_output_dir
 
 from RPA.Browser.Selenium import Selenium 
@@ -14,24 +14,37 @@ from RPA.Browser.Selenium import Selenium
 
 @task
 def main():
+    browser = Selenium()
+    
+    # Define Chrome options to disable popup blocking
+    options = [
+        "--disable-popup-blocking",
+        "--ignore-certificate-errors"
+    ]
+    
+    secrets =vault.get_secret('aljazeersite') 
+
+    # Open browser with specified options
+    browser.open_available_browser(secrets["url"], browser="Chrome", options=options)
+
     # Initialize work items and browser
     # work_items = WorkItems()
 
     
-    browser = Selenium(auto_close = False)
+    # browser = Selenium(auto_close = False)
     # Define browser options
-    options = {
-        "args": [
-            "--disable-popup-blocking",
-            "--ignore-certificate-errors",
-            "--start-maximized"
-        ]
-    }
+    # options = {
+    #     "args": [
+    #         "--disable-popup-blocking",
+    #         "--ignore-certificate-errors",
+    #         "--start-maximized"
+    #     ]
+    # }
 
     # Open the browser with the specified options
     # browser.open_available_browser('https://example.com', options=options)
 
-    secrets =vault.get_secret('aljazeersite') 
+    
     # excel = Excel()
     
     # # Open the Excel file to store data
@@ -46,7 +59,7 @@ def main():
     #     number_of_months = item.payload["number_of_months"]
         
         # Implement web scraping logic here
-    browser.open_available_browser(secrets["url"])
+    # browser.open_available_browser(secrets["url"])
     # browser.open_available_browser(secrets['url'],maximized=True)
     try:
         browser.click_button('Allow all')
@@ -145,6 +158,7 @@ def main():
     
     # Close the browser
     browser.close_all_browsers()
+
 
 
 def extract_before_ellipsis(text):
