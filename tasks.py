@@ -7,7 +7,7 @@ from robocorp import storage
 from datetime import datetime, timedelta
 from datetime import datetime
 from robocorp.tasks import task
-from RPA.Robocorp.WorkItems import WorkItems
+# from RPA.Robocorp.WorkItems import WorkItems
 from robocorp import vault
 from robocorp.tasks import get_output_dir
 # from RPA.Excel.Files import Files as Excel
