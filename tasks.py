@@ -155,7 +155,7 @@ def retrive_data(browser, num_months_ago, search_phrase):
 
 @task
 def save_data_to_Excel(worksheet, data):
-worksheet = workbook.worksheet("Sheet1")
+    worksheet = workbook.worksheet("Sheet1")
     for i in range(len(data)):
         worksheet.append_rows_to_worksheet(data[i], header=False)
      # Save the workbook
@@ -196,6 +196,7 @@ def main():
     topics_and_months = content.splitlines()
     
     for topic_and_month in topics_and_months:
+        print(len(topic_and_month), "The length of topics and months")
         # Assuming each line is "search_phrase,number_of_months"
         search_phrase, number_of_months = topic_and_month.split(',') 
          
@@ -209,8 +210,8 @@ def main():
         search_the_phrase(browser_instance, search_phrase)
         data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
 
-        save_data_to_Excel(worksheet, data_retrieved)
-        # worksheet.save_workbook()
+        save_data_to_Excel(workbook, data_retrieved)
+        workbook.save(excel_file_path)
         
     print("This is Selamu's output")
     
