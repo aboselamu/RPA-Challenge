@@ -11,10 +11,53 @@ from RPA.Robocorp.WorkItems import WorkItems
 from robocorp import vault
 from robocorp.tasks import get_output_dir
 from RPA.Excel.Files import Files as Excel
-
+from robocorp.excel import Workbook
 from RPA.Browser.Selenium import Selenium 
 logger = logging.getLogger(__name__)
 # import re
+
+@task
+def main():
+    logger.info("Starting the main task.")
+
+    # Define the path for the new Excel file in the output directory
+    output_dir = Path(get_output_dir())
+    excel_file_path = output_dir / "Articles.xlsx"
+    
+    # Create a new Excel workbook and add a worksheet
+    workbook = Workbook()
+    workbook.create_workbook(excel_file_path)
+    worksheet = workbook.add_worksheet("Sheet1")
+    worksheet.append(["No", "Title", "Date", "Description", "Picture Filename", 
+                            "Count", "Contains Money"])
+
+    # Retrieve the text content from the asset
+    content = storage.get_text("parameters")
+
+    # Split the content into lines
+    topics_and_months = content.splitlines()
+    
+    for topic_and_month in topics_and_months:
+        # Assuming each line is "search_phrase,number_of_months"
+        search_phrase, number_of_months = topic_and_month.split(',') 
+        
+        # Convert number_of_months to an integer
+        number_of_months = int(number_of_months.strip())
+        search_phrase = search_phrase.strip()
+        # Create an output work item with this data as the payload
+        # workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
+
+        browser_instance = opening_the_news_Site()
+        search_the_phrase(browser_instance, search_phrase)
+        data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
+
+        save_data_to_Excel(worksheet, data_retrieved)
+        
+    print("This is Selamu's output")
+    
+    # Close the browser
+    # browser.close_all_browsers()
+
 
 @task
 def opening_the_news_Site():
@@ -63,7 +106,7 @@ def retrive_data(browser, num_months_ago, search_phrase):
 
     # Declearing varibale to return the date
     data ={}
-    counter = 0
+    counter = 1
     # Handling the possible inputs
     if num_months_ago == 0:
         num_months_ago =1
@@ -153,53 +196,12 @@ def retrive_data(browser, num_months_ago, search_phrase):
     return data
 
 @task
-def save_data_to_Excel(excel, file):
+def save_data_to_Excel(worksheet, data):
 
-    for i in range(len(file)):
-        excel.append_row(file[i])
-
-@task
-def main():
-    logger.info("Starting the main task.")
-
-    excel = Excel()
-    # Open the Excel file to store data
-    excel.create_workbook("news_data.xlsx")
-    excel.rename_worksheet("Sheet", "Data")
-    excel.append_row(["No", "Title", "Date", "Description", "Picture Filename", 
-                            "Count", "Contains Money"])
-
-    # Retrieve the text content from the asset
-    content = storage.get_text("parameters")
-
-    # Split the content into lines
-    topics_and_months = content.splitlines()
-    
-    for topic_and_month in topics_and_months:
-        # Assuming each line is "search_phrase,number_of_months"
-        search_phrase, number_of_months = topic_and_month.split(',') 
-        
-        # Convert number_of_months to an integer
-        number_of_months = int(number_of_months.strip())
-        search_phrase = search_phrase.strip()
-        # Create an output work item with this data as the payload
-        # workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
-
-        browser_instance = opening_the_news_Site()
-        search_the_phrase(browser_instance, search_phrase)
-        data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
-
-        save_data_to_Excel(data_retrieved, excel)
-        
-    print("This is Selamu's output")
-        
-    # Save and close the Excel workbook
-    # excel.save("output/news_data.xlsx")
-    # excel.close()
-    
-    # Close the browser
-    # browser.close_all_browsers()
-
+    for i in range(len(data)):
+        worksheet.append(data[i])
+     # Save the workbook
+    workbook.save_workbook()
 
 
 def extract_before_ellipsis(text):
