@@ -17,7 +17,6 @@ logger = logging.getLogger(__name__)
 # import re
 
 
-@task
 def opening_the_news_Site():
     logger.info("Opening the news site.")
     browser = Selenium()
@@ -33,7 +32,7 @@ def opening_the_news_Site():
     browser.open_available_browser(secrets["url"], browser_selection="Chrome", options=options)
     return browser
 
-@task
+
 def search_the_phrase(browser, phrase):
     logger.info(f"Searching the phrase: {phrase}")
     try:
@@ -57,7 +56,7 @@ def search_the_phrase(browser, phrase):
     dropdown_locator = "//select[@id='search-sort-option']/option[1]" 
     browser.click_element(dropdown_locator)
 
-@task
+
 def retrive_data(browser, num_months_ago, search_phrase):
 
     logger.info(f"Retrieving data from {num_months_ago} months ago.")
@@ -153,7 +152,7 @@ def retrive_data(browser, num_months_ago, search_phrase):
             is_there_ShowMore = False
     return data
 
-@task
+
 def save_data_to_Excel(workbook, data, sheet_name):
     worksheet = workbook.worksheet(sheet_name)
     for i in range(len(data)):
@@ -200,7 +199,7 @@ def main():
         print(len(topic_and_month), "The length of topics and months")
         # Assuming each line is "search_phrase,number_of_months"
         search_phrase, number_of_months = topic_and_month.split(',') 
-         
+          
         # Convert number_of_months to an integer
         number_of_months = int(number_of_months.strip())
         search_phrase = search_phrase.strip()
