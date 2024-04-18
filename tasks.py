@@ -29,8 +29,10 @@ def main():
     
     # Append a row with column headers
     worksheet = workbook.worksheet("Sheet1")
-    worksheet.append(["No", "Title", "Date", "Description", "Picture Filename", 
+    
+    worksheet.append_rows_to_worksheet(["No", "Title", "Date", "Description", "Picture Filename", 
                       "Count", "Contains Money"])
+                      
     
     # Save the workbook
     workbook.save(excel_file_path)
@@ -212,7 +214,7 @@ def retrive_data(browser, num_months_ago, search_phrase):
 def save_data_to_Excel(worksheet, data):
 
     for i in range(len(data)):
-        worksheet.append(data[i])
+        worksheet.append_rows_to_worksheet(data[i], header=False)
      # Save the workbook
     workbook.save_workbook()
 
