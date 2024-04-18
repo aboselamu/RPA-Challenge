@@ -53,7 +53,7 @@ def main():
     for topic_and_month in topics_and_months:
         # Assuming each line is "search_phrase,number_of_months"
         search_phrase, number_of_months = topic_and_month.split(',') 
-        
+         
         # Convert number_of_months to an integer
         number_of_months = int(number_of_months.strip())
         search_phrase = search_phrase.strip()
