@@ -27,11 +27,16 @@ def main():
     # Create a new Excel workbook and add a worksheet with the name 'Sheet1'
     workbook = excel.create_workbook(fmt="xlsx", sheet_name="Sheet1")
     
+    
     # Append a row with column headers
     worksheet = workbook.worksheet("Sheet1")
+    row_to_append = [
+        ["No", "Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"]
+    ]
     
-    worksheet.append_rows_to_worksheet(["No", "Title", "Date", "Description", "Picture Filename", 
-                      "Count", "Contains Money"])
+    # Append the row to the worksheet
+    worksheet.append_rows_to_worksheet(row_to_append, header=False)
+    
                       
     
     # Save the workbook
@@ -216,7 +221,7 @@ def save_data_to_Excel(worksheet, data):
     for i in range(len(data)):
         worksheet.append_rows_to_worksheet(data[i], header=False)
      # Save the workbook
-    workbook.save_workbook()
+    worksheet.save_workbook()
 
 
 def extract_before_ellipsis(text):
