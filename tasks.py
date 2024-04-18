@@ -10,8 +10,8 @@ from robocorp.tasks import task
 from RPA.Robocorp.WorkItems import WorkItems
 from robocorp import vault
 from robocorp.tasks import get_output_dir
-from RPA.Excel.Files import Files as Excel
-from robocorp.excel import Workbook
+# from RPA.Excel.Files import Files as Excel
+from robocorp import excel
 from RPA.Browser.Selenium import Selenium 
 logger = logging.getLogger(__name__)
 # import re
@@ -24,12 +24,25 @@ def main():
     output_dir = Path(get_output_dir())
     excel_file_path = output_dir / "Articles.xlsx"
     
-    # Create a new Excel workbook and add a worksheet
-    workbook = Workbook()
-    workbook.create_workbook(excel_file_path)
-    worksheet = workbook.add_worksheet("Sheet1")
+    # Create a new Excel workbook and add a worksheet with the name 'Sheet1'
+    workbook = excel.create_workbook(fmt="xlsx", sheet_name="Sheet1")
+    
+    # Append a row with column headers
+    worksheet = workbook.worksheet("Sheet1")
     worksheet.append(["No", "Title", "Date", "Description", "Picture Filename", 
-                            "Count", "Contains Money"])
+                      "Count", "Contains Money"])
+    
+    # Save the workbook
+    workbook.save(excel_file_path)
+
+# "
+    
+#     # Create a new Excel workbook and add a worksheet
+#     workbook = Workbook()
+#     workbook.create_workbook(excel_file_path)
+#     worksheet = workbook.add_worksheet("Sheet1")
+#     worksheet.append(["No", "Title", "Date", "Description", "Picture Filename", 
+#                             "Count", "Contains Money"])
 
     # Retrieve the text content from the asset
     content = storage.get_text("parameters")
