@@ -232,7 +232,7 @@ def main():
     workbook.save(excel_file_path)
     
     # Close the browser
-    browser.close_all_browsers()
+    browser_instance.close_all_browsers()
 
 
 # getting the date and description from the excert of the article
