@@ -14,7 +14,7 @@ from robocorp.tasks import get_output_dir
 from robocorp import excel
 from RPA.Browser.Selenium import Selenium 
 logger = logging.getLogger(__name__)
-# import re
+import re
 
 
 def opening_the_news_Site():
