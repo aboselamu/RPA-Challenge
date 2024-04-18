@@ -164,6 +164,8 @@ def save_data_to_Excel(workbook, data, sheet_name):
 def main():
     logger.info("Starting the main task.")
 
+    browser_instance = opening_the_news_Site()
+
     # Define the path for the new Excel file in the output directory
     output_dir = Path(get_output_dir())
     excel_file_path = output_dir / "Articles.xlsx"
@@ -182,12 +184,6 @@ def main():
     # Append the row to the worksheet
     worksheet.append_rows_to_worksheet(row_to_append, header=False)
     
-                      
-    
-    # Save the workbook
-    workbook.save(excel_file_path)
-
-
 
     # Retrieve the text content from the asset
     content = storage.get_text("parameters")
@@ -207,13 +203,14 @@ def main():
         # Create an output work item with this data as the payload
         # workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
 
-        browser_instance = opening_the_news_Site()
+        
         search_the_phrase(browser_instance, search_phrase)
         data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
 
         save_data_to_Excel(workbook, data_retrieved, sheet_name)
         workbook.save(excel_file_path)
-        
+
+    workbook.save(excel_file_path)
     print("This is Selamu's output")
     
     # Close the browser
