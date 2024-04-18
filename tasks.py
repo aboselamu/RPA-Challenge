@@ -62,7 +62,7 @@ def retrive_data(browser, num_months_ago, search_phrase):
     logger.info(f"Retrieving data from {num_months_ago} months ago.")
 
     # Declearing varibale to return the date
-    data ={}
+    data =[]
     counter = 1
     # Handling the possible inputs
     if num_months_ago == 0:
@@ -113,8 +113,8 @@ def retrive_data(browser, num_months_ago, search_phrase):
                         picture_name = image_url.split("/")[-1]  # Extracting picture name from URL
                         output_path = Path(get_output_dir()) / picture_name
 
-                        data[counter] = [counter,title.text, article_date, description, 
-                                            picture_name, no_of_search_phrase, contains]
+                        data.append([counter,title.text, article_date, description, 
+                                            picture_name, no_of_search_phrase, contains])
                         #update counter
                         counter+=1
 
@@ -155,11 +155,12 @@ def retrive_data(browser, num_months_ago, search_phrase):
 
 def save_data_to_Excel(workbook, data, sheet_name):
     worksheet = workbook.worksheet(sheet_name)
-    for i in range(len(data)):
-        worksheet.append_rows_to_worksheet(data[i], header=False)
-     # Save the workbook
-    # worksheet.save_workbook()
-
+    try:
+        for i in range(len(data)):
+            worksheet.append_rows_to_worksheet(data[i], header=False)
+        # Save the workbook
+        # worksheet.save_workbook()
+    except 
 @task
 def main():
     logger.info("Starting the main task.")
