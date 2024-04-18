@@ -2,42 +2,8 @@
 # https://github.com/robocorp/rcc/blob/master/docs/recipes.md#what-is-in-robotyaml
 
 tasks:
-  opening_the_news_Site:
-    command:
-      - python
-      - -m
-      - robocorp.tasks
-      - run
-      - tasks.py
-      - -t
-      - opening_the_news_Site
-  search_the_phrase:
-    command:
-      - python
-      - -m
-      - robocorp.tasks
-      - run
-      - tasks.py
-      - -t
-      - search_the_phrase
-  retrive_data:
-    command:
-      - python
-      - -m
-      - robocorp.tasks
-      - run
-      - tasks.py
-      - -t
-      - retrive_data
-  main:
-    command:
-      - python
-      - -m
-      - robocorp.tasks
-      - run
-      - tasks.py
-      - -t
-      - main
+  Main Task:
+    shell: python -m robocorp.tasks run tasks.py -t main
 devTasks: {}
 condaConfigFile: conda.yaml
 ignoreFiles:
