@@ -204,6 +204,7 @@ def main():
         # Convert number_of_months to an integer
         number_of_months = int(number_of_months.strip())
         search_phrase = search_phrase.strip()
+        print(number_of_months, search_phrase, "zzzzzzzzzzzzz")
         # Create an output work item with this data as the payload
         # workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
 
