@@ -188,27 +188,27 @@ def main():
     # Retrieve the text content from the asset
     content = storage.get_text("parameters")
 
-    # Split the content into lines
-    topics_and_months = content.splitlines()
+    # # Split the content into lines
+    # topics_and_months = content.splitlines()
     
-    for topic_and_month in topics_and_months:
-        print(len(topic_and_month), "The length of topics and months")
-        # Assuming each line is "search_phrase,number_of_months"
-        search_phrase, number_of_months = topic_and_month.split(',') 
-          
-        # Convert number_of_months to an integer
-        number_of_months = int(number_of_months.strip())
-        search_phrase = search_phrase.strip()
-        print(number_of_months, search_phrase, "zzzzzzzzzzzzz")
-        # Create an output work item with this data as the payload
-        # workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
-
+    # # for topic_and_month in topics_and_months:
+    # print(len(topic_and_month), "The length of topics and months")
+    # Assuming each line is "search_phrase,number_of_months"
+    search_phrase, number_of_months = content.split(',') 
         
-        search_the_phrase(browser_instance, search_phrase)
-        data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
+    # Convert number_of_months to an integer
+    number_of_months = int(number_of_months.strip())
+    search_phrase = search_phrase.strip()
+    print(number_of_months, search_phrase, "zzzzzzzzzzzzz")
+    # Create an output work item with this data as the payload
+    # workitems.outputs.create(payload={"search_phrase": search_phrase, "number_of_months": number_of_months})
 
-        save_data_to_Excel(workbook, data_retrieved, sheet_name)
-        workbook.save(excel_file_path)
+    
+    search_the_phrase(browser_instance, search_phrase)
+    data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
+
+    save_data_to_Excel(workbook, data_retrieved, sheet_name)
+    workbook.save(excel_file_path)
 
     workbook.save(excel_file_path)
     print("This is Selamu's output")
