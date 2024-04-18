@@ -292,6 +292,4 @@ def no_of_topic_and_money_amount(title, description, search_phrase):
     # Find all matches in the text
     matchesT = re.findall(pattern, title)
     matchesD = re.findall(pattern, description)
-    
-    return matches
     return countT + countD,  bool(matchesT + matchesD)
