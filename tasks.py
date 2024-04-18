@@ -99,7 +99,7 @@ def retrive_data(browser, num_months_ago, search_phrase):
 
                     title= browser.find_element("tag:h3", parent=article)
                     if title.text not in articles_titiles:
-                        updating
+                    
                         articles_titiles.append(title.text)
                         
                         # does the title or description contains money
