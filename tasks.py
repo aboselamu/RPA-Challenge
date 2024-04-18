@@ -156,11 +156,14 @@ def retrive_data(browser, num_months_ago, search_phrase):
 def save_data_to_Excel(workbook, data, sheet_name):
     worksheet = workbook.worksheet(sheet_name)
     try:
+        print("INside data save to excel")
         for i in range(len(data)):
             worksheet.append_rows_to_worksheet(data[i], header=False)
         # Save the workbook
         # worksheet.save_workbook()
-    except 
+    except Exception as e:
+        print(e)
+        pass 
 @task
 def main():
     logger.info("Starting the main task.")
