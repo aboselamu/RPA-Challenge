@@ -158,7 +158,8 @@ def save_data_to_Excel(workbook, data, sheet_name):
     try:
         print("INside data save to excel")
         for i in range(len(data)):
-            worksheet.append_rows_to_worksheet(data[i], header=False)
+            row_to_append = [data[i]]
+            worksheet.append_rows_to_worksheet(row_to_append, header=False)
         # Save the workbook
         # worksheet.save_workbook()
     except Exception as e:
