@@ -29,7 +29,7 @@ tasks:
       - tasks.py
       - -t
       - retrive_data
-    main:
+  main:
     command:
       - python
       - -m
