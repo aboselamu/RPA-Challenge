@@ -154,8 +154,8 @@ def retrive_data(browser, num_months_ago, search_phrase):
     return data
 
 @task
-def save_data_to_Excel(workbook, data):
-    worksheet = workbook.worksheet("Sheet1")
+def save_data_to_Excel(workbook, data, sheet_name):
+    worksheet = workbook.worksheet(sheet_name)
     for i in range(len(data)):
         worksheet.append_rows_to_worksheet(data[i], header=False)
      # Save the workbook
@@ -174,7 +174,8 @@ def main():
     
     
     # Append a row with column headers
-    worksheet = workbook.worksheet("Sheet1")
+    sheet_name = "Sheet1"
+    worksheet = workbook.worksheet(sheet_name)
     row_to_append = [
         ["No", "Title", "Date", "Description", "Picture Filename", "Count", "Contains Money"]
     ]
@@ -210,7 +211,7 @@ def main():
         search_the_phrase(browser_instance, search_phrase)
         data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
 
-        save_data_to_Excel(workbook, data_retrieved)
+        save_data_to_Excel(workbook, data_retrieved, sheet_name)
         workbook.save(excel_file_path)
         
     print("This is Selamu's output")
