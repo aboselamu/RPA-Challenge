@@ -72,6 +72,7 @@ def main():
         data_retrieved =  retrive_data(browser_instance, number_of_months, search_phrase)
 
         save_data_to_Excel(worksheet, data_retrieved)
+        worksheet.save_workbook()
         
     print("This is Selamu's output")
     
@@ -221,7 +222,7 @@ def save_data_to_Excel(worksheet, data):
     for i in range(len(data)):
         worksheet.append_rows_to_worksheet(data[i], header=False)
      # Save the workbook
-    worksheet.save_workbook()
+    # worksheet.save_workbook()
 
 
 def extract_before_ellipsis(text):
